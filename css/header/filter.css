@@ -1,0 +1,56 @@
+#appareil button {
+    background-color: #68D9A4;
+}
+
+#hidden-ingredients-filter,
+#hidden-appareil-filter,
+#hidden-ustensiles-filter {
+    display: none;
+}
+
+#ingredients button {
+    background-color: #3282F7;
+}
+
+#ustensiles button {
+    background-color: #ED6454;
+}
+
+header section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 1rem auto;
+    padding: 0;
+    width: 95%;
+}
+
+header section button {
+    align-items: center;
+    border: none;
+    border-radius: .3125rem;
+    color: #ffff;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.125rem;
+    height: 4.3125rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    transition: linear .3s;
+    width: 11rem;
+}
+
+header section button:hover {
+    transform: scale(1.04);
+}
+
+@media screen and (min-width: 900px) {
+    header section {
+        flex-direction: row;
+    }
+
+    header section button {
+        margin-right: 2rem;
+    }
+}
