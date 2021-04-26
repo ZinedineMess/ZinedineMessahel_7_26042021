@@ -1,0 +1,66 @@
+#recipes>article>div.recipe-title>span>i {
+    margin-right: .3rem;
+}
+
+#recipes>article {
+    background-color: #E7E7E7;
+    border-radius: .3125rem;
+    height: 23.75rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    width: 23.75rem;
+}
+
+#recipes>article>div.recipe-title {
+    align-items: center;
+    background-color: #E7E7E7;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#recipes>article>div.recipe-title>h2,
+#recipes>article>div.recipe-title>span {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#recipes>article>div.recipes-info {
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#recipes>article>div.recipes-info>div.recipes-ingredients,
+#recipes>article>div.recipes-info>div.recipes-instructions {
+    width: 50%;
+}
+
+#recipes>article>div.recipes-info>div.recipes-ingredients>p {
+    font-size: .8rem;
+    margin: .125rem 0;
+}
+
+#recipes>article>div.recipes-info>div.recipes-instructions>span {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 8;
+    display: -webkit-box;
+    font-size: .8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#recipes>article>img {
+    height: 11.125rem;
+    width: 23.75rem;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
