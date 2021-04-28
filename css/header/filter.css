@@ -2,18 +2,88 @@
     background-color: #68D9A4;
 }
 
+#close-ingredients-filter {
+    font-size: 1.125rem;
+    left: 32rem;
+    position: absolute;
+    top: 1.8rem;
+}
+
 #hidden-ingredients-filter,
 #hidden-appareil-filter,
 #hidden-ustensiles-filter {
+    background-color: #3282F7;
+    border-radius: 5px;
+    color: #ffff;
     display: none;
+    position: absolute;
+    top: 16.2rem;
+    width: 35rem;
+    z-index: 10;
 }
 
 #ingredients button {
     background-color: #3282F7;
 }
 
+#ingredients-example {
+    display: flex;
+    flex-wrap: wrap;
+    height: 1521px;
+    justify-content: space-between;
+    list-style: none;
+}
+
+#input-ingredients {
+    background-color: #3282F7;
+    border: none;
+    border-radius: 5px;
+    font-family: Lato;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    height: 4.3125rem;
+    outline: none;
+    padding: 2rem;
+    width: 100%;
+}
+
+#input-ingredients::placeholder {
+    color: #FFF;
+}
+
+#tags-badges {
+    align-items: center;
+    border-radius: 1rem;
+    color: #FFF;
+    cursor: pointer;
+    display: none;
+    height: 2rem;
+    margin-left: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition: color 200ms;
+    width: fit-content;
+}
+
+#tags-badges span {
+    margin-right: .5rem;
+}
+
 #ustensiles button {
     background-color: #ED6454;
+}
+
+.actived {
+    background-color: #000;
+}
+
+.list-ingredients {
+    width: 10rem;
+}
+
+.list-ingredients:hover {
+    background-color: #215cb4;
 }
 
 header section {
@@ -39,10 +109,6 @@ header section button {
     padding: 1rem;
     transition: linear .3s;
     width: 11rem;
-}
-
-header section button:hover {
-    transform: scale(1.04);
 }
 
 @media screen and (min-width: 900px) {

@@ -3,10 +3,12 @@
 
 import {
     recipes
-} from './recipes.js';
-import Recipes from './template.js';
+} from './data/recipesData.js';
+import Recipes from './Recipes.js';
+import SearchBox from './SearchBox.js';
 
 (function appDispatch() {
     let data = recipes;
     new Recipes().displayRecipes(data);
+    new SearchBox().search(data);
 }) ();

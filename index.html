@@ -31,9 +31,13 @@
 
         <!-- MESSAGE NO RESULT-->
         <div id='message-info-no-recipe'>
-            <span>Aucune recette ne correspond à votre recherche vous pouvez chercher « tarte aux pommes », « poisson », etc.</span>
+            <span>Aucune recette ne correspond à votre recherche vous pouvez chercher « tarte aux pommes », « poisson »,
+                etc.</span>
             <i class="far fa-times-circle"></i>
         </div>
+
+        <!-- CLICKED TAGS BOX -->
+        <div id="tags-badges"></div>
 
         <!-- FILTER -->
         <section id="filter">
@@ -41,27 +45,29 @@
                 <button>Ingrédients <i class="fas fa-chevron-down" id='open-ingredients-filter'></i></button>
                 <div id='hidden-ingredients-filter'>
                     <label for="ingredient-search"></label>
-                    <input type="search" id="site-search" aria-label="Search through ingredients"
+                    <input type="search" id="input-ingredients" aria-label="Search through ingredients"
                         placeholder="Rechercher un ingrédient">
-                    <i class="fas fa-chevron-up" id="close-ingradients-filter"></i>
+                    <i class="fas fa-chevron-up" id="close-ingredients-filter"></i>
                     <div id='ingredients-example'></div>
                 </div>
             </div>
+
             <div id="appareil">
                 <button>Appareil <i class="fas fa-chevron-down" id='open-appareil-filter'></i></button>
                 <div id='hidden-appareil-filter'>
                     <label for="appareil-search"></label>
-                    <input type="search" id="site-search" aria-label="Search through appareil"
+                    <input type="search" id="input-appareil" aria-label="Search through appareil"
                         placeholder="Rechercher un appareil">
                     <i class="fas fa-chevron-up" id="close-appareil-filter"></i>
                     <div id='appareil-example'></div>
                 </div>
             </div>
+
             <div id="ustensiles">
                 <button>Ustensiles <i class="fas fa-chevron-down" id='open-ustensiles-filter'></i></button>
                 <div id='hidden-ustensiles-filter'>
                     <label for="ustensiles-search"></label>
-                    <input type="search" id="site-search" aria-label="Search through ustensiles"
+                    <input type="search" id="input-ustensiles" aria-label="Search through ustensiles"
                         placeholder="Rechercher un ustensile">
                     <i class="fas fa-chevron-up" id="close-ustensiles-filter"></i>
                     <div id='ustensiles-example'></div>

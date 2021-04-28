@@ -1,3 +1,27 @@
+#message-info-no-recipe {
+    background: #fed8b2;
+    border-radius: .5rem;
+    color: #4d2a07;
+    display: none;
+    font-size: 1.21rem;
+    height: auto;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+#message-info-result-search {
+    background: #c4dcff;
+    border-radius: .5rem;
+    color: #032250;
+    display: none;
+    font-size: 1.21rem;
+    height: auto;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 1rem;
+}
+
 .fa-search {
     background-color: #E7E7E7;
     border: none;
@@ -9,9 +33,9 @@
 }
 
 header form {
+    margin: 0 auto;
     position: relative;
     width: 95%;
-    margin: 0 auto;
 }
 
 header form input {
@@ -22,32 +46,10 @@ header form input {
     height: 2.8125rem;
     margin-bottom: 1rem;
     margin-top: 1rem;
+    outline: none;
+    padding: 2rem;
     text-overflow: ellipsis;
     width: 100%;
-}
-
-#message-info-result-search {
-    color: #032250;
-    background: #c4dcff;
-    height: auto;
-    display: none;
-    justify-content: space-between;
-    border-radius: .5rem;
-    overflow: hidden;
-    font-size: 1.21rem;
-    padding: 1rem;
-}
-
-#message-info-no-recipe {
-    color: #4d2a07;
-    background: #fed8b2;
-    height: auto;
-    display: none;
-    justify-content: space-between;
-    border-radius: .5rem;
-    overflow: hidden;
-    font-size: 1.21rem;
-    padding: 1rem;
 }
 
 @media screen and (min-width: 900px) {
