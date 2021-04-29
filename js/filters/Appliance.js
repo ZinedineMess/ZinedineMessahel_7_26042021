@@ -6,7 +6,7 @@ import InputOpenClose from '../factory/InputOpenClose.js';
 
 
 export default class Appliance {
-    init(data) {
+    build(data) {
         let buttonAppliance = document.querySelector("#appareil > button");
         let openArrow = document.querySelector("#open-appareil-filter");
         let closeArrow = document.querySelector("#close-appareil-filter");

@@ -5,7 +5,7 @@ import Filter from '../factory/Filters.js';
 import InputOpenClose from '../factory/InputOpenClose.js';
 
 export default class Ingredients {
-    init(data) {
+    build(data) {
         let buttonIngredients = document.querySelector("#ingredients > button");
         let openArrow = document.querySelector("#open-ingredients-filter");
         let closeArrow = document.querySelector("#close-ingredients-filter");
