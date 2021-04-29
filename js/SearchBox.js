@@ -41,22 +41,14 @@ export default class SearchBox {
         `;
 
         if (filteredRecipes.length <= 0) {
-            messageInfoResult.innerHTML = "";
             messageInfoNoRecipe.style.display = 'flex';
             messageInfoResult.style.display = 'none';
+        } else {
+            messageInfoResult.innerHTML = messageTemplate;
+            messageInfoResult.style.display = 'flex';
+            messageInfoNoRecipe.style.display = 'none';
+            recipesSection.innerHTML = "";
+            new Recipes().displayRecipes(filteredRecipes);
         }
-        messageInfoResult.innerHTML = "";
-        messageInfoResult.innerHTML = messageTemplate;
-        messageInfoResult.style.display = 'flex';
-        messageInfoNoRecipe.style.display = 'none';
-        recipesSection.innerHTML = "";
-        new Recipes().displayRecipes(filteredRecipes);
-        this.close(i, message);
-    }
-
-    close(i, message) {
-        i.addEventListener('click', () => {
-            message.style.display = "none";
-        })
     }
 }

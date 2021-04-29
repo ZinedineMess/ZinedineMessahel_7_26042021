@@ -1,8 +1,24 @@
-#appareil button {
+#appareil button,
+#hidden-appareil-filter,
+#input-appareil {
     background-color: #68D9A4;
 }
 
-#close-ingredients-filter {
+.list-ingredients.actived {
+    background-color: #001a42;
+}
+
+.list-appareil.actived {
+    background-color: #004c29;
+}
+
+.list-ustensiles.actived {
+    background-color: #490700;
+}
+
+#close-ingredients-filter,
+#close-appareil-filter,
+#close-ustensiles-filter {
     font-size: 1.125rem;
     left: 32rem;
     position: absolute;
@@ -12,7 +28,6 @@
 #hidden-ingredients-filter,
 #hidden-appareil-filter,
 #hidden-ustensiles-filter {
-    background-color: #3282F7;
     border-radius: 5px;
     color: #ffff;
     display: none;
@@ -22,20 +37,49 @@
     z-index: 10;
 }
 
-#ingredients button {
-    background-color: #3282F7;
-}
-
-#ingredients-example {
-    display: flex;
-    flex-wrap: wrap;
-    height: 1521px;
-    justify-content: space-between;
-    list-style: none;
-}
-
+#hidden-ingredients-filter,
+#ingredients button,
 #input-ingredients {
     background-color: #3282F7;
+}
+
+#hidden-ustensiles-filter,
+#input-ustensiles,
+#ustensiles button {
+    background-color: #ED6454;
+}
+
+#hidden-ingredients-filter,
+#hidden-appareil-filter,
+#hidden-ustensiles-filter {
+    color: #FFF;
+}
+
+#ingredients-example,
+#appareil-example,
+#ustensiles-example {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 0.5rem;
+}
+
+#ingredients-example li,
+#appareil-example li,
+#ustensiles-example li {
+    text-align: start;
+    width: 9rem;
+    padding: .5rem 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#input-ingredients,
+#input-appareil,
+#input-ustensiles {
     border: none;
     border-radius: 5px;
     font-family: Lato;
@@ -46,10 +90,6 @@
     outline: none;
     padding: 2rem;
     width: 100%;
-}
-
-#input-ingredients::placeholder {
-    color: #FFF;
 }
 
 #tags-badges {
@@ -70,20 +110,21 @@
     margin-right: .5rem;
 }
 
-#ustensiles button {
-    background-color: #ED6454;
-}
-
 .actived {
-    background-color: #000;
-}
-
-.list-ingredients {
-    width: 10rem;
+    background-color: #FFF;
+    color: #0000;
 }
 
 .list-ingredients:hover {
-    background-color: #215cb4;
+    background-color: #013789;
+}
+
+.list-appareil:hover {
+    background-color: #009550;
+}
+
+.list-ustensiles:hover {
+    background-color: #8d0e00;
 }
 
 header section {
