@@ -1,133 +1,4 @@
-#appareil button,
-#hidden-appareil-filter,
-#input-appareil {
-    background-color: #68D9A4;
-}
-
-.list-ingredients.actived {
-    background-color: #001a42;
-}
-
-.list-appareil.actived {
-    background-color: #004c29;
-}
-
-.list-ustensiles.actived {
-    background-color: #490700;
-}
-
-#close-ingredients-filter,
-#close-appareil-filter,
-#close-ustensiles-filter {
-    font-size: 1.125rem;
-    left: 32rem;
-    position: absolute;
-    top: 1.8rem;
-}
-
-#hidden-ingredients-filter,
-#hidden-appareil-filter,
-#hidden-ustensiles-filter {
-    border-radius: 5px;
-    color: #ffff;
-    display: none;
-    position: absolute;
-    top: 16.2rem;
-    width: 35rem;
-    z-index: 10;
-}
-
-#hidden-ingredients-filter,
-#ingredients button,
-#input-ingredients {
-    background-color: #3282F7;
-}
-
-#hidden-ustensiles-filter,
-#input-ustensiles,
-#ustensiles button {
-    background-color: #ED6454;
-}
-
-#hidden-ingredients-filter,
-#hidden-appareil-filter,
-#hidden-ustensiles-filter {
-    color: #FFF;
-}
-
-#ingredients-example,
-#appareil-example,
-#ustensiles-example {
-    display: flex;
-    flex-wrap: wrap;
-    height: fit-content;
-    justify-content: space-evenly;
-    list-style: none;
-    padding: 0.5rem;
-}
-
-#ingredients-example li,
-#appareil-example li,
-#ustensiles-example li {
-    text-align: start;
-    width: 9rem;
-    padding: .5rem 1rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-#input-ingredients,
-#input-appareil,
-#input-ustensiles {
-    border: none;
-    border-radius: 5px;
-    font-family: Lato;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    height: 4.3125rem;
-    outline: none;
-    padding: 2rem;
-    width: 100%;
-}
-
-#tags-badges {
-    align-items: center;
-    border-radius: 1rem;
-    color: #FFF;
-    cursor: pointer;
-    display: none;
-    height: 2rem;
-    margin-left: .5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    transition: color 200ms;
-    width: fit-content;
-}
-
-#tags-badges span {
-    margin-right: .5rem;
-}
-
-.actived {
-    background-color: #FFF;
-    color: #0000;
-}
-
-.list-ingredients:hover {
-    background-color: #013789;
-}
-
-.list-appareil:hover {
-    background-color: #009550;
-}
-
-.list-ustensiles:hover {
-    background-color: #8d0e00;
-}
-
-header section {
+#filter {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -136,7 +7,9 @@ header section {
     width: 95%;
 }
 
-header section button {
+#ingredients>button,
+#appareil>button,
+#ustensiles>button {
     align-items: center;
     border: none;
     border-radius: .3125rem;
@@ -152,12 +25,134 @@ header section button {
     width: 11rem;
 }
 
+#hiddenIngredientsFilter,
+#hiddenAppareilFilter,
+#hiddenUstensilesFilter {
+    color: #FFF;
+    border-radius: 5px;
+    color: #ffff;
+    display: none;
+    position: absolute;
+    top: 16.2rem;
+    width: 35rem;
+    z-index: 10;
+}
+
+#hiddenIngredientsFilter,
+#ingredients>button,
+#inputIngredients {
+    background-color: #3282F7;
+}
+
+#hiddenAppareilFilter,
+#appareil>button,
+#inputAppareil {
+    background-color: #68D9A4;
+}
+
+#hiddenUstensilesFilter,
+#ustensiles>button,
+#inputUstensiles {
+    background-color: #ED6454;
+}
+
+#inputIngredients,
+#inputAppareil,
+#inputUstensiles {
+    border: none;
+    border-radius: 5px;
+    font-family: Lato;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    height: 4.3125rem;
+    outline: none;
+    padding: 2rem;
+    width: 100%;
+}
+
+#closeIngredientsFilter,
+#closeAppareilFilter,
+#closeUstensilesFilter {
+    font-size: 1.125rem;
+    left: 32rem;
+    position: absolute;
+    top: 1.8rem;
+}
+
+#ingredientsExample,
+#appareilExample,
+#ustensilesExample {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: 0.5rem;
+}
+
+#ingredientsExample li,
+#appareilExample li,
+#ustensilesExample li {
+    text-align: start;
+    width: 9rem;
+    padding: .5rem 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.21rem;
+}
+
+.listIngredients.actived {
+    background-color: #001a42;
+}
+
+.listAppareil.actived {
+    background-color: #004c29;
+}
+
+.listUstensiles.actived {
+    background-color: #490700;
+}
+
+.listIngredients:hover {
+    background-color: #013789;
+}
+
+.listAppareil:hover {
+    background-color: #009550;
+}
+
+.listUstensiles:hover {
+    background-color: #8d0e00;
+}
+
+#tagsBadges {
+    align-items: center;
+    border-radius: 1rem;
+    color: #FFF;
+    cursor: pointer;
+    display: none;
+    height: 2rem;
+    margin-left: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition: color 200ms;
+    width: fit-content;
+}
+
+#tagsBadges span {
+    margin-right: .5rem;
+}
+
 @media screen and (min-width: 900px) {
-    header section {
+    #filter {
         flex-direction: row;
     }
 
-    header section button {
+    #ingredients>button,
+    #appareil>button,
+    #ustensiles>button {
         margin-right: 2rem;
     }
 }

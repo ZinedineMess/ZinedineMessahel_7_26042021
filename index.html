@@ -8,69 +8,70 @@
     <title>Les petis plats</title>
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.15.1/css/all.css'>
     <link rel='stylesheet' href='./css/style.css'>
-    <script type='module' src='./js/main.js'></script>
+    <script src='./js/data/recipesData.js'></script>
+    <script type='module' src='./js/app.js'></script>
 </head>
 
 <body>
     <!-- HEADER-->
-    <header>
+    <header role='banner'>
         <img src="https://res.cloudinary.com/dlpyn3wxf/image/upload/v1619049061/logo-les-petits-plats_jagbwd.png"
             alt="Les petits plats" />
 
         <!-- SEARCH BAR-->
-        <form action='' method='get' id='search-bar'>
-            <label for="site-search"></label>
-            <input type="search" id="search-bar-input"
+        <form action='' method='get' id='searchBar'>
+            <label for="siteSearch"></label>
+            <input type="search" id="searchBarInput"
                 placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
                 aria-label="Search through site content">
             <i class="fas fa-search"></i>
         </form>
 
         <!-- MESSAGE RESULTS-->
-        <div id='message-info-result-search'></div>
+        <div id='messageInfoResultSearch'></div>
 
         <!-- MESSAGE NO RESULT-->
-        <div id='message-info-no-recipe'>
+        <div id='messageInfoNoRecipe'>
             <span>Aucune recette ne correspond à votre recherche vous pouvez chercher « tarte aux pommes », « poisson »,
                 etc.</span>
             <i class="far fa-times-circle"></i>
         </div>
 
         <!-- CLICKED TAGS BOX -->
-        <div id="tags-badges"></div>
+        <div id="tagsBadges"></div>
 
         <!-- FILTER -->
         <section id="filter">
             <div id="ingredients">
-                <button>Ingrédients <i class="fas fa-chevron-down" id='open-ingredients-filter'></i></button>
-                <div id='hidden-ingredients-filter'>
+                <button>Ingrédients <i class="fas fa-chevron-down" id='openIngredientsFilter'></i></button>
+                <div id='hiddenIngredientsFilter'>
                     <label for="ingredient-search"></label>
-                    <input type="search" id="input-ingredients" aria-label="Search through ingredients"
+                    <input type="search" id="inputIngredients" aria-label="Search through ingredients"
                         placeholder="Rechercher un ingrédient">
-                    <i class="fas fa-chevron-up" id="close-ingredients-filter"></i>
-                    <div id='ingredients-example'></div>
+                    <i class="fas fa-chevron-up" id="closeIngredientsFilter"></i>
+                    <div id='ingredientsExample'></div>
                 </div>
             </div>
 
             <div id="appareil">
-                <button>Appareil <i class="fas fa-chevron-down" id='open-appareil-filter'></i></button>
-                <div id='hidden-appareil-filter'>
+                <button>Appareil <i class="fas fa-chevron-down" id='openAppareilFilter'></i></button>
+                <div id='hiddenAppareilFilter'>
                     <label for="appareil-search"></label>
-                    <input type="search" id="input-appareil" aria-label="Search through appareil"
+                    <input type="search" id="inputAppareil" aria-label="Search through appareil"
                         placeholder="Rechercher un appareil">
-                    <i class="fas fa-chevron-up" id="close-appareil-filter"></i>
-                    <div id='appareil-example'></div>
+                    <i class="fas fa-chevron-up" id="closeAppareilFilter"></i>
+                    <div id='appareilExample'></div>
                 </div>
             </div>
 
             <div id="ustensiles">
-                <button>Ustensiles <i class="fas fa-chevron-down" id='open-ustensiles-filter'></i></button>
-                <div id='hidden-ustensiles-filter'>
-                    <label for="ustensiles-search"></label>
-                    <input type="search" id="input-ustensiles" aria-label="Search through ustensiles"
+                <button>Ustensiles <i class="fas fa-chevron-down" id='openUstensilesFilter'></i></button>
+                <div id='hiddenUstensilesFilter'>
+                    <label for="ustensilesSearch"></label>
+                    <input type="search" id="inputUstensiles" aria-label="Search through ustensiles"
                         placeholder="Rechercher un ustensile">
-                    <i class="fas fa-chevron-up" id="close-ustensiles-filter"></i>
-                    <div id='ustensiles-example'></div>
+                    <i class="fas fa-chevron-up" id="closeUstensilesFilter"></i>
+                    <div id='ustensilesExample'></div>
                 </div>
             </div>
         </section>
@@ -78,7 +79,7 @@
 
     <main>
         <!-- RECIPES-->
-        <section id="recipes">
+        <section id="mainContent">
         </section>
     </main>
 </body>

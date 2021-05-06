@@ -1,7 +1,6 @@
 'use strict';
-/////////////////////////////////////////
 
-export const recipes = [{
+const recipes = [{
         "id": 1,
         "name": "Limonade de Coco",
         "servings": 1,
@@ -21,7 +20,7 @@ export const recipes = [{
             },
             {
                 "ingredient": "Sucre",
-                "quantite": 30,
+                "quantity": 30,
                 "unit": "grammes"
             },
             {
@@ -31,7 +30,7 @@ export const recipes = [{
         "time": 10,
         "description": "Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée",
         "appliance": "Blender",
-        "ustensils": ["cuillère à Soupe", "verres", "presse citron"]
+        "ustensils": ["cuillère à soupe", "verres", "presse citron"]
     },
     {
         "id": 2,
@@ -52,14 +51,14 @@ export const recipes = [{
             },
             {
                 "ingredient": "Carotte",
-                "quantite": 1
+                "quantity": 1
             },
             {
                 "ingredient": "Citron Vert",
                 "quantity": 5
             },
             {
-                "ingredient": "Lait de Coco",
+                "ingredient": "Lait de coco",
                 "quantity": 100,
                 "unit": "ml"
             }
@@ -67,7 +66,7 @@ export const recipes = [{
         "time": 60,
         "description": "Découper le thon en dés, mettre dans un plat et recouvrir de jus de citron vert (mieux vaut prendre un plat large et peu profond). Laisser reposer au réfrigérateur au moins 2 heures. (Si possible faites-le le soir pour le lendemain. Après avoir laissé mariner le poisson, coupez le concombre en fines rondelles sans la peau et les tomates en prenant soin de retirer les pépins. Rayer la carotte. Ajouter les légumes au poissons avec le citron cette fois ci dans un Saladier. Ajouter le lait de coco. Pour ajouter un peu plus de saveur vous pouver ajouter 1 à 2 cuillères à soupe de Crème de coco",
         "appliance": "Saladier",
-        "ustensils": ["presse citron"]
+        "ustensils": ["Presse citron"]
     }, {
         "id": 3,
         "name": "Poulet coco réunionnais",
@@ -101,7 +100,7 @@ export const recipes = [{
         "time": 80,
         "description": "Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olive. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomate, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz",
         "appliance": "Cocotte",
-        "ustensils": ["couteau"]
+        "ustensils": ["Couteau"]
     }, {
         "id": 4,
         "name": "Salade de riz",
@@ -157,12 +156,12 @@ export const recipes = [{
                 "quantity": 2
             },
             {
-                "ingredient": "Crème fraiche",
+                "ingredient": "Crème fraîche",
                 "quantity": 2,
                 "unit": "cuillères à soupe"
             },
             {
-                "ingredient": "gruyère râpé",
+                "ingredient": "Gruyère râpé",
                 "quantity": 100,
                 "unit": "grammes"
             },
@@ -173,7 +172,7 @@ export const recipes = [{
             }
         ],
         "time": 45,
-        "description": "Etaler la pâte feuilleté aux dimensions du moule, étaler la moutarde sur la pâte feuilleté, ajouter le thon. Découper les tomates en rondelles et les poser sur le poisson, ajouter un peu de crème fraiche sur toute la tarte et recouvrez de gruyère râpé. Cuire au four 30 minutes",
+        "description": "Etaler la pâte feuilleté aux dimensions du moule, étaler la moutarde sur la pâte feuilleté, ajouter le thon. Découper les tomates en rondelles et les poser sur le poisson, ajouter un peu de crème fraîche sur toute la tarte et recouvrez de gruyère râpé. Cuire au four 30 minutes",
         "appliance": "Four",
         "ustensils": ["moule à tarte", "râpe à fromage", "couteau"]
     },
@@ -194,12 +193,12 @@ export const recipes = [{
                 "quantity": "2"
             },
             {
-                "ingredient": "Crème fraiche",
+                "ingredient": "Crème fraîche",
                 "quantity": 25,
                 "unit": "cl"
             },
             {
-                "ingredient": "Sucre en Poudre",
+                "ingredient": "Sucre en poudre",
                 "quantity": 100,
                 "unit": "grammes"
             },
@@ -211,7 +210,7 @@ export const recipes = [{
             }
         ],
         "time": 50,
-        "description": "Commencez par mélanger les oeufs le sucre et le sucre vanillé dans un saladier, découper les pommes en tranches, ajouter la crème fraiche aux oeufs. Une fois que tout est pret, étalez la tarte dans le moule. N'oubliez pas de piquer le fond avec une fourchette avant depositionner les pommes sur la tarte. Finallement verser la préparation à base d'oeufs et de crême fraiche. Laisser cuire au four pendant 30 minutes",
+        "description": "Commencez par mélanger les oeufs le sucre et le sucre vanillé dans un saladier, découper les pommes en tranches, ajouter la crème fraîche aux oeufs. Une fois que tout est pret, étalez la tarte dans le moule. N'oubliez pas de piquer le fond avec une fourchette avant depositionner les pommes sur la tarte. Finallement verser la préparation à base d'oeufs et de crême fraiche. Laisser cuire au four pendant 30 minutes",
         "appliance": "Four",
         "ustensils": ["moule à tarte", "saladier", "fourchette"]
     }, {
@@ -270,12 +269,12 @@ export const recipes = [{
                 "quantity": 2
             },
             {
-                "ingredient": "Sucre en Poudre",
+                "ingredient": "Sucre en poudre",
                 "quantity": "110",
                 "unit": "grammes"
             },
             {
-                "ingredient": "farine",
+                "ingredient": "Farine",
                 "quantity": 90,
                 "unit": "grammes"
             }
@@ -303,7 +302,7 @@ export const recipes = [{
                 "unit": "grammes"
             },
             {
-                "ingredient": "Vinaigre Balsamic"
+                "ingredient": "Vinaigre balsamic"
             },
             {
                 "ingredient": "Huile d'olive"
@@ -313,7 +312,7 @@ export const recipes = [{
             }
         ],
         "time": 15,
-        "description": "Peler le concombre le couper 2, retirer les pépins. Couper les olives en morceaux, ainsi que le fromage de chèvre. Ajouter le basilic ainsi que le vinaigre balsamic et l'huile d'olives à votre gout.",
+        "description": "Peler le concombre le couper 2, retirer les pépins. Couper les olives en morceaux, ainsi que le fromage de chèvre. Ajouter le basilic ainsi que le vinaigre balsamic et l'huile d'olive à votre gout.",
         "appliance": "Saladier",
         "ustensils": ["cuillère en bois", "couteau"]
     },
@@ -441,7 +440,7 @@ export const recipes = [{
                 "unit": "cuillère à soupe"
             },
             {
-                "ingredient": "huile d'olive",
+                "ingredient": "Huile d'olive",
                 "quantity": 2,
                 "unit": "cuillère à soupe"
             }
@@ -553,7 +552,7 @@ export const recipes = [{
                 "unit": "tiges"
             },
             {
-                "ingredient": "huile d'olives",
+                "ingredient": "Huile d'olive",
                 "quantity": 2,
                 "unit": "cuillère à soupe"
             }
@@ -665,7 +664,7 @@ export const recipes = [{
                 "unit": "grammes"
             },
             {
-                "ingredient": "Crème fraiche",
+                "ingredient": "Crème fraîche",
                 "quantity": 200,
                 "unit": "grammes"
             },
@@ -675,7 +674,7 @@ export const recipes = [{
                 "unit": "grammes"
             },
             {
-                "ingredient": "huile d'olive",
+                "ingredient": "Huile d'olive",
                 "quantity": 1,
                 "unit": "cuillères à soupe"
             }
@@ -714,13 +713,13 @@ export const recipes = [{
                 "unit": "cl"
             },
             {
-                "ingredient": "Crème Fraiche",
+                "ingredient": "Crème fraîche",
                 "quantity": 1,
                 "unit": "cuillères à soupe"
             }
         ],
         "time": 30,
-        "description": "Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraiche à la viande hachée. Serivir.",
+        "description": "Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraîche à la viande hachée. Serivir.",
         "appliance": "Casserolle.",
         "ustensils": ["Cuillère en bois", "louche", "couteau"]
     },
@@ -782,7 +781,7 @@ export const recipes = [{
                 "quantity": 3
             },
             {
-                "ingredient": "Crème Fraîche",
+                "ingredient": "Crème fraîche",
                 "quantity": 20,
                 "unit": "cl"
             },
@@ -882,7 +881,7 @@ export const recipes = [{
                 "quantity": 1
             },
             {
-                "ingredient": "Huile d'olives"
+                "ingredient": "Huile d'olive"
             },
             {
                 "ingredient": "Oignon",
@@ -1001,7 +1000,7 @@ export const recipes = [{
         "name": "Purée de pois cassés",
         "servings": 4,
         "ingredients": [{
-                "ingredient": "Pois Cassé",
+                "ingredient": "Pois cassé",
                 "quantity": 500,
                 "unit": "grammes"
             },
@@ -1103,7 +1102,7 @@ export const recipes = [{
                 "unit": "tranches"
             },
             {
-                "ingredient": "Saumon Fumé",
+                "ingredient": "Saumon fumé",
                 "quantity": 4,
                 "unit": "tranches"
             },
@@ -1244,7 +1243,7 @@ export const recipes = [{
                 "unit": "grammes"
             },
             {
-                "ingredient": "Huile d'olives",
+                "ingredient": "Huile d'olive",
                 "quantity": 25,
                 "unit": "cl"
             },
@@ -1465,7 +1464,7 @@ export const recipes = [{
                 "unit": "grammes"
             },
             {
-                "ingredient": "farine",
+                "ingredient": "Farine",
                 "quantity": 40,
                 "unit": "grammes"
             }
@@ -1563,13 +1562,13 @@ export const recipes = [{
                 "unit": "grammes"
             },
             {
-                "ingredient": "Crème Fraîche",
+                "ingredient": "Crème fraîche",
                 "quantity": 20,
                 "unit": "cl"
             }
         ],
         "time": 5,
-        "description": "Mélanger le jus de citron avec le sucre et la mascarpone. Ajouter la crème fraiche. Mélanger le tout et mettre au congélateur pendant 1 heure. Servir",
+        "description": "Mélanger le jus de citron avec le sucre et la mascarpone. Ajouter la crème fraîche. Mélanger le tout et mettre au congélateur pendant 1 heure. Servir",
         "appliance": "Saladier",
         "ustensils": ["fouet", "verres", "cuillère en bois"]
     },

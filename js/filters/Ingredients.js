@@ -1,70 +1,49 @@
 'use strict';
-///////////////////////////////////////
 
-import Filter from '../factory/Filters.js';
-import InputOpenClose from '../factory/InputOpenClose.js';
+import Utils from '../Utils.js';
 
 export default class Ingredients {
-    build(data) {
-        let buttonIngredients = document.querySelector("#ingredients > button");
-        let openArrow = document.querySelector("#open-ingredients-filter");
-        let closeArrow = document.querySelector("#close-ingredients-filter");
-        let hiddenIngredientsFilter = document.querySelector("#hidden-ingredients-filter");
-        let ingredientsExample = document.getElementById("ingredients-example");
-        let filtres = document.querySelector('#ingredients-example');
+    static build() {
+        let btn = document.querySelector("#ingredients > button");
+        let openIngredientsArrow = document.querySelector("#openIngredientsFilter");
+        let closeIngredientsArrow = document.querySelector("#closeIngredientsFilter");
+        let hiddenIngredientsFilter = document.querySelector("#hiddenIngredientsFilter");
 
-        this.getAllIngredients(data, ingredientsExample);
-        new InputOpenClose().openInput(buttonIngredients, openArrow, hiddenIngredientsFilter);
-        new InputOpenClose().closeInput(buttonIngredients, openArrow, closeArrow, hiddenIngredientsFilter);
-        new Filter().filters(filtres, buttonIngredients, openArrow, hiddenIngredientsFilter);
+        new Utils()
+            .launchInputFilters(btn, openIngredientsArrow, closeIngredientsArrow, hiddenIngredientsFilter);
+    }
+
+    static buildSuggestionIngredients(ingredients) {
+        let ingredientsExample = document.querySelector("#ingredientsExample");
+        let ingredient = this.getAllIngredients(ingredients);
+
+        this.showIngredientsInInput(ingredient, ingredientsExample);
     }
 
     // Collect all the ingredients, and sort them alphabetically
-    getAllIngredients(data, ingredientsExample) {
+    static getAllIngredients(ingredients) {
         let allIngredients = [];
 
-        data.forEach(recipe => {
-            recipe.ingredients.forEach((element) => {
-                allIngredients.push(element.ingredient);
-            })
-        })
-
-        let ingredientsArrayNoSort = [...new Set(allIngredients)];
-        let ingredientsArray = ingredientsArrayNoSort.sort((a, b) => { // SORT BY TITLE
-            if (a.toLowerCase() < b.toLowerCase()) {
-                return -1;
-            } else if (a.toLowerCase() > b.toLowerCase()) {
-                return 1;
+        ingredients.forEach(rec => {
+            for(let i = 0; i < rec.length; i ++) {
+                allIngredients.push(rec[i].ingredient);
             }
         })
 
-        this.showIngredientsInInput(ingredientsArray, ingredientsExample);
-        this.keyup(ingredientsArray, ingredientsExample);
+        let ingredientsArray = new Utils().sortByTitle(allIngredients);
+
+        return ingredientsArray;
     }
 
-    // Create the elements of the list of ingredients
-    showIngredientsInInput(ingredientsArray, ingredientsExample) {
-        ingredientsArray.forEach((ingredient) => {
+     // Create the elements of the list of ingredients
+    static showIngredientsInInput(ingredients, ingredientsExample) {
+        ingredients.forEach((ingredient) => {
             let listIngredients = document.createElement('li');
 
             listIngredients.innerHTML = `${ingredient}`
             ingredientsExample.appendChild(listIngredients);
             listIngredients.classList.add('list-ingredients');
             listIngredients.setAttribute('data-filter', `${ingredient}`);
-        })
-    }
-
-    // Allows you to be able to search in the list of ingredients using the input
-    keyup(ingredientsArray, ingredientsExample) {
-        let ingredientInput = document.getElementById('input-ingredients');
-
-        ingredientInput.addEventListener('keyup', (key) => {
-            let valueInput = key.target.value.toLowerCase();
-            let filteredInputIngredients = ingredientsArray.filter((ingredients) => {
-                return (ingredients.toLowerCase().includes(valueInput))
-            });
-            ingredientsExample.innerHTML = " ";
-            this.showIngredientsInInput(filteredInputIngredients, ingredientsExample);
         })
     }
 }
