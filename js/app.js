@@ -1,17 +1,41 @@
 'use strict';
 
-import RecipesBuilder from './RecipesBuilder.js';
-import Search from './Search.js';
-import Ingredients from './filters/Ingredients.js';
-import Appliances from './filters/Appliances.js';
-import Ustensils from './filters/Ustensils.js';
+import RecipesBuilder from './pages/RecipesBuilder.js';
+import DataLogic from './utilities/DataLogic.js';
+
+import Search from './search/Search.js';
+
+import Ingredients from './search/Ingredients.js';
+import Appliances from './search/Appliances.js';
+import Ustensils from './search/Ustensils.js';
+
 
 // Build the recipes section by default
-RecipesBuilder.buildSection(recipes);
+RecipesBuilder.buildSection(recipesApiResult);
+
+Ingredients.init(DataLogic.getAllIngredients());
+Ingredients.filter(DataLogic.getAllIngredients());
+
+Appliances.init(DataLogic.getAllAppliances());
+Appliances.filter(DataLogic.getAllAppliances());
+
+Ustensils.init(DataLogic.getAllUstensils());
+Ustensils.filter(DataLogic.getAllUstensils());
 
 // Search Input
-new Search().listenerSearchInput(recipes);
+document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
+    let valueSearch = key.target.value;
+    let mainContent = document.getElementById('mainContent');
+    mainContent.innerHTML = '';
 
-Ingredients.build(recipes);
-Appliances.build(recipes);
-Ustensils.build(recipes);
+    let result = Search.search(valueSearch);
+
+    Ingredients.init(result.ingredients);
+    Ingredients.filter(result.ingredients);
+
+    Appliances.init(result.appliances);
+    Appliances.filter(result.appliances);
+
+    Ustensils.init(result.ustensils);
+    Ustensils.filter(result.ustensils);
+});

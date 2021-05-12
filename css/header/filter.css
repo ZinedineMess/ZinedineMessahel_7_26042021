@@ -1,6 +1,7 @@
 #filter {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: flex-start;
     margin: 1rem auto;
     padding: 0;
@@ -28,7 +29,6 @@
 #hiddenIngredientsFilter,
 #hiddenAppareilFilter,
 #hiddenUstensilesFilter {
-    color: #FFF;
     border-radius: 5px;
     color: #ffff;
     display: none;
@@ -69,6 +69,7 @@
     outline: none;
     padding: 2rem;
     width: 100%;
+    color: #ffff;
 }
 
 #closeIngredientsFilter,
@@ -91,9 +92,9 @@
     padding: 0.5rem;
 }
 
-#ingredientsExample li,
-#appareilExample li,
-#ustensilesExample li {
+#ingredientsExample > li,
+#appareilExample > li,
+#ustensilesExample > li {
     text-align: start;
     width: 9rem;
     padding: .5rem 1rem;
@@ -103,46 +104,19 @@
     font-size: 1.21rem;
 }
 
-.listIngredients.actived {
-    background-color: #001a42;
+#ingredientsExample > li:hover {
+    background-color: #ffff;
+    color : #3282F7;
 }
 
-.listAppareil.actived {
-    background-color: #004c29;
+#appareilExample > li:hover {
+    background-color: #ffff;
+    color : #68D9A4;
 }
 
-.listUstensiles.actived {
-    background-color: #490700;
-}
-
-.listIngredients:hover {
-    background-color: #013789;
-}
-
-.listAppareil:hover {
-    background-color: #009550;
-}
-
-.listUstensiles:hover {
-    background-color: #8d0e00;
-}
-
-#tagsBadges {
-    align-items: center;
-    border-radius: 1rem;
-    color: #FFF;
-    cursor: pointer;
-    display: none;
-    height: 2rem;
-    margin-left: .5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    transition: color 200ms;
-    width: fit-content;
-}
-
-#tagsBadges span {
-    margin-right: .5rem;
+#ustensilesExample > li:hover {
+    background-color: #ffff;
+    color : #ED6454;
 }
 
 @media screen and (min-width: 900px) {

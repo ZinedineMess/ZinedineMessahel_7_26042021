@@ -1,6 +1,6 @@
 'use strict';
 
-const recipes = [{
+const recipesApiResult = [{
         "id": 1,
         "name": "Limonade de Coco",
         "servings": 1,

@@ -32,7 +32,7 @@
     background: #c4dcff;
     border-radius: .5rem;
     color: #032250;
-    display: none;
+    display: flex;
     font-size: 1.21rem;
     height: auto;
     justify-content: space-between;
@@ -44,7 +44,7 @@
     background: #fed8b2;
     border-radius: .5rem;
     color: #4d2a07;
-    display: none;
+    display: flex;
     font-size: 1.21rem;
     height: auto;
     justify-content: space-between;
