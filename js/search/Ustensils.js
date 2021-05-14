@@ -54,6 +54,7 @@ export default class Ustensils {
     static sortDomArticle() {
         document.querySelectorAll('.articleRecipes').forEach((article) => {
             if (Utils.ownAllFilters(article)) {
+                console.log(article);
                 article.style.display = 'block';
                 this.btnUstensils.style.width = "11rem";
                 this.openArrow.style.display = 'block';

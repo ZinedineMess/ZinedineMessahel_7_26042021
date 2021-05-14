@@ -2,6 +2,7 @@
 
 import RecipesBuilder from '../pages/RecipesBuilder.js';
 import Utils from '../utilities/Utils.js';
+import DataLogic from '../utilities/DataLogic.js';
 
 export default class Search {
     static recipes = recipesApiResult; // all recipes
@@ -16,9 +17,9 @@ export default class Search {
 
             return {
                 'recipesMatchedSorted': this.recipesMatchedSorted,
-                'ingredients': this.getIngredientsResultForFilters(),
-                'appliances': this.getAppliancesResultForFilters(),
-                'ustensils': this.getUstensilsResultForFilters(),
+                'ingredients': DataLogic.getAllIngredients(this.recipesMatchedSorted),
+                'appliances': DataLogic.getAllAppliances(this.recipesMatchedSorted),
+                'ustensils': DataLogic.getAllUstensils(this.recipesMatchedSorted),
             };
         }
         this.recipesMatchedSorted = [];
@@ -70,44 +71,4 @@ export default class Search {
 
         return this.recipesMatchedSorted;
     };
-
-    // get the ingredients from the search result
-    static getIngredientsResultForFilters() {
-        let ingredients = [];
-
-        this.recipesMatchedSorted.forEach((recipe) => {
-            recipe.ingredients.forEach((ing) => {
-                if (!ingredients.includes(ing.ingredient.toLowerCase()))
-                    ingredients.push(ing.ingredient.toLowerCase());
-            });
-        });
-
-        return ingredients;
-    };
-
-    // get the appliances from the search result
-    static getAppliancesResultForFilters() {
-        let appliances = [];
-
-        this.recipesMatchedSorted.forEach((recipe) => {
-            if (!appliances.includes(recipe.appliance.toLowerCase()))
-                appliances.push(recipe.appliance.toLowerCase());
-        });
-
-        return appliances;
-    }
-
-    // get the ustensils from the search result
-    static getUstensilsResultForFilters() {
-        let ustensils = [];
-
-        this.recipesMatchedSorted.forEach((recipe) => {
-            recipe.ustensils.forEach((ustensil) => {
-                if (!ustensils.includes(ustensil.toLowerCase()))
-                    ustensils.push(ustensil.toLowerCase());
-            });
-        });
-
-        return ustensils;
-    }
 }

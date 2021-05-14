@@ -13,14 +13,14 @@ import Ustensils from './search/Ustensils.js';
 // Build the recipes section by default
 RecipesBuilder.buildSection(recipesApiResult);
 
-Ingredients.init(DataLogic.getAllIngredients());
-Ingredients.filter(DataLogic.getAllIngredients());
+Ingredients.init(DataLogic.getAllIngredients(recipesApiResult));
+Ingredients.filter(DataLogic.getAllIngredients(recipesApiResult));
 
-Appliances.init(DataLogic.getAllAppliances());
-Appliances.filter(DataLogic.getAllAppliances());
+// Appliances.init(DataLogic.getAllAppliances(recipesApiResult));
+// Appliances.filter(DataLogic.getAllAppliances(recipesApiResult));
 
-Ustensils.init(DataLogic.getAllUstensils());
-Ustensils.filter(DataLogic.getAllUstensils());
+// Ustensils.init(DataLogic.getAllUstensils(recipesApiResult));
+// Ustensils.filter(DataLogic.getAllUstensils(recipesApiResult));
 
 // Search Input
 document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
@@ -33,9 +33,9 @@ document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
     Ingredients.init(result.ingredients);
     Ingredients.filter(result.ingredients);
 
-    Appliances.init(result.appliances);
-    Appliances.filter(result.appliances);
+    // Appliances.init(result.appliances);
+    // Appliances.filter(result.appliances);
 
-    Ustensils.init(result.ustensils);
-    Ustensils.filter(result.ustensils);
+    // Ustensils.init(result.ustensils);
+    // Ustensils.filter(result.ustensils);
 });

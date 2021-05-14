@@ -2,9 +2,9 @@
 
 export default class DataLogic {
     // get all the ingredients to make them appear by default, before searching
-    static getAllIngredients() {
+    static getAllIngredients(ing) {
         let ingredients = [];
-        recipesApiResult.forEach((recipe) => {
+        ing.forEach((recipe) => {
             recipe.ingredients.forEach((ing) => {
                 if (!ingredients.includes(ing.ingredient.toLowerCase()))
                     ingredients.push(ing.ingredient.toLowerCase());
@@ -14,9 +14,9 @@ export default class DataLogic {
     };
 
     // get all the appliances to make them appear by default, before searching
-    static getAllAppliances() {
+    static getAllAppliances(app) {
         let appliances = [];
-        recipesApiResult.forEach((recipe) => {
+        app.forEach((recipe) => {
             if (!appliances.includes(recipe.appliance.toLowerCase()))
                 appliances.push(recipe.appliance.toLowerCase());
         });
@@ -24,9 +24,9 @@ export default class DataLogic {
     };
 
     // get all the ustensils to make them appear by default, before searching
-    static getAllUstensils() {
+    static getAllUstensils(ust) {
         let ustensils = [];
-        recipesApiResult.forEach((recipe) => {
+        ust.forEach((recipe) => {
             recipe.ustensils.forEach((ustensil) => {
                 if (!ustensils.includes(ustensil.toLowerCase()))
                     ustensils.push(ustensil.toLowerCase());
