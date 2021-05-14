@@ -16,7 +16,7 @@ export default class Appliances {
         this.showAppliancesInInput(Utils.sortByTitle(resultApp));
     };
 
-    static filter(collection) {
+    static searchInput(collection) {
         document.getElementById('inputAppareil').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
 
@@ -36,32 +36,6 @@ export default class Appliances {
             this.appliancesExample.appendChild(listAppliances);
             listAppliances.classList.add('list-ingredients');
             listAppliances.setAttribute('data-filter', `${appliance}`);
-        });
-    };
-
-    static filters() {
-        this.appliancesExample.addEventListener('click', event => {
-            let classValue = event.target.classList.value;
-
-            if (-1 === classValue.indexOf('actived')) {
-                event.target.classList.add('actived');
-            } else {
-                event.target.classList.remove('actived');
-            }
-            this.sortDomArticle();
-        });
-    };
-
-    static sortDomArticle() {
-        document.querySelectorAll('.articleRecipes').forEach((article) => {
-            if (Utils.ownAllFilters(article)) {
-                article.style.display = 'block';
-                this.btnAppliances.style.width = "11rem";
-                this.openArrow.style.display = 'block';
-                this.hiddenFilter.style.display = 'none';
-            } else {
-                article.style.display = 'none';
-            }
         });
     };
 }

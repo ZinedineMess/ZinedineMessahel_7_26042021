@@ -65,25 +65,4 @@ export default class Utils {
 
         return this;
     };
-
-    static getActiveFilters() {
-        let currentFilters = document.querySelectorAll('li.actived');
-        let filterSelected = [];
-
-        currentFilters.forEach(function (currentFilter) {
-            filterSelected.push(currentFilter.getAttribute("data-filter"));
-        });
-
-        return filterSelected;
-    }
-
-    static ownAllFilters(article) {
-        let filters = this.getActiveFilters();
-        let articleFilters = this.normalizeText(article.getAttribute('data-filter'));
-        let intersection = filters.filter(
-            x => articleFilters.includes(x)
-        );
-
-        return filters.length == intersection.length;
-    }
 }

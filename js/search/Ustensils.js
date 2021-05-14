@@ -16,7 +16,7 @@ export default class Ustensils {
         this.showUstensilsInInput(Utils.sortByTitle(resultUst));
     };
 
-    static filter(collection) {
+    static searchInput(collection) {
         document.getElementById('inputUstensiles').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
             if (Utils.isValid(valueSearch)) {
@@ -37,31 +37,4 @@ export default class Ustensils {
             listUstensils.setAttribute('data-filter', `${ustensil}`);
         });
     };
-
-    static filters() {
-        this.ustensilsExample.addEventListener('click', event => {
-            let classValue = event.target.classList.value;
-
-            if (-1 === classValue.indexOf('actived')) {
-                event.target.classList.add('actived');
-            } else {
-                event.target.classList.remove('actived');
-            }
-            this.sortDomArticle();
-        });
-    }
-
-    static sortDomArticle() {
-        document.querySelectorAll('.articleRecipes').forEach((article) => {
-            if (Utils.ownAllFilters(article)) {
-                console.log(article);
-                article.style.display = 'block';
-                this.btnUstensils.style.width = "11rem";
-                this.openArrow.style.display = 'block';
-                this.hiddenFilter.style.display = 'none';
-            } else {
-                article.style.display = 'none';
-            }
-        });
-    }
 }

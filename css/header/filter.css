@@ -8,6 +8,18 @@
     width: 95%;
 }
 
+#ingredientsExample > li.list-ingredients.actived {
+    background-color: black;
+}
+
+#appareilExample > li.list-appareil.actived {
+    background-color: black;
+}
+
+#ustensilesExample > li.list-ustensilesactived {
+    background-color: black;
+}
+
 #ingredients>button,
 #appareil>button,
 #ustensiles>button {

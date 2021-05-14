@@ -14,13 +14,17 @@ import Ustensils from './search/Ustensils.js';
 RecipesBuilder.buildSection(recipesApiResult);
 
 Ingredients.init(DataLogic.getAllIngredients(recipesApiResult));
-Ingredients.filter(DataLogic.getAllIngredients(recipesApiResult));
+Ingredients.searchInput(DataLogic.getAllIngredients(recipesApiResult));
+Ingredients.filters(recipesApiResult);
 
 // Appliances.init(DataLogic.getAllAppliances(recipesApiResult));
-// Appliances.filter(DataLogic.getAllAppliances(recipesApiResult));
+// Appliances.searchInput(DataLogic.getAllAppliances(recipesApiResult));
+// Appliances.filters(recipesApiResult);
 
 // Ustensils.init(DataLogic.getAllUstensils(recipesApiResult));
-// Ustensils.filter(DataLogic.getAllUstensils(recipesApiResult));
+// Ustensils.searchInput(DataLogic.getAllUstensils(recipesApiResult));
+// Ustensils.filters(recipesApiResult);
+
 
 // Search Input
 document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
@@ -31,11 +35,12 @@ document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
     let result = Search.search(valueSearch);
 
     Ingredients.init(result.ingredients);
-    Ingredients.filter(result.ingredients);
+    Ingredients.searchInput(result.ingredients);
+    Ingredients.filters(result.recipesMatchedSorted);
 
     // Appliances.init(result.appliances);
-    // Appliances.filter(result.appliances);
+    // Appliances.searchInput(result.appliances);
 
     // Ustensils.init(result.ustensils);
-    // Ustensils.filter(result.ustensils);
+    // Ustensils.searchInput(result.ustensils);
 });

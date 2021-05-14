@@ -2,6 +2,7 @@
 
 import Utils from '../utilities/Utils.js';
 import Filters from './Filters.js';
+import RecipesBuilder from '../pages/RecipesBuilder.js';
 
 export default class Ingredients {
     static btnIngredients = document.querySelector("#ingredients > button");
@@ -9,15 +10,15 @@ export default class Ingredients {
     static closeArrow = document.querySelector("#closeIngredientsFilter");
     static hiddenFilter = document.querySelector("#hiddenIngredientsFilter");
     static ingredientsExample = document.getElementById('ingredientsExample');
+    static recipesMatched = [];
 
     static init(resultIng) {
         this.ingredientsExample.innerHTML = '';
         new Utils().launchInputFilters(this.btnIngredients, this.openArrow, this.closeArrow, this.hiddenFilter);
         this.showIngredientsInInput(Utils.sortByTitle(resultIng));
-        this.filters();
     };
 
-    static filter(collection) {
+    static searchInput(collection) {
         document.getElementById('inputIngredients').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
             if (Utils.isValid(valueSearch)) {
@@ -39,29 +40,65 @@ export default class Ingredients {
         });
     };
 
-    static filters() {
+    static filters(collection) {
         this.ingredientsExample.addEventListener('click', event => {
             let classValue = event.target.classList.value;
+            let mainContent = document.getElementById('mainContent');
 
             if (-1 === classValue.indexOf('actived')) {
+                mainContent.innerHTML = '';
                 event.target.classList.add('actived');
+                this.filterBadges();
+                RecipesBuilder.buildSection(this.sortDomArticle(collection));
             } else {
+                mainContent.innerHTML = '';
                 event.target.classList.remove('actived');
+                RecipesBuilder.buildSection(collection);
             }
-            this.sortDomArticle();
         });
     }
 
-    static sortDomArticle() {
-        document.querySelectorAll('.articleRecipes').forEach((article) => {
-            if (Utils.ownAllFilters(article)) {
-                article.style.display = 'block';
-                this.btnIngredients.style.width = "11rem";
-                this.openArrow.style.display = 'block';
-                this.hiddenFilter.style.display = 'none';
-            } else {
-                article.style.display = 'none';
-            }
+    static getActiveFilters() {
+        let currentFilters = document.querySelectorAll('li.actived');
+        let filterSelected = [];
+
+        currentFilters.forEach(function (currentFilter) {
+            filterSelected.push(currentFilter.getAttribute("data-filter"));
         });
+
+        return filterSelected;
+    }
+
+    static sortDomArticle(collection) {
+        let filters = this.getActiveFilters();
+        console.log(filters);
+        collection.forEach(recipe => {
+            recipe.ingredients.forEach(ing => {
+                if (Utils.normalizeText(ing.ingredient).includes(filters)) {
+                    this.recipesMatched.push(recipe);
+                }
+            })
+        })
+
+        return this.recipesMatched;
+    }
+
+    static filterBadges() {
+        this.addFilterBadge();
+    }
+
+    static addFilterBadge() {
+        let tagsBadges = document.getElementById('tagsBadges');
+        let tags = this.getActiveFilters();
+        tags.forEach(tag => {
+            let template = 
+            `
+            <div>
+                <span>${Utils.upperText(tag)}</span>
+                <i class="far fa-times-circle"></i>
+            </div>
+            `
+            tagsBadges.innerHTML = template;
+        })
     }
 }
