@@ -1,3 +1,17 @@
+#appareilExample>li:hover {
+    background-color: #ffff;
+    color: #68D9A4;
+}
+
+#closeIngredientsFilter,
+#closeAppareilFilter,
+#closeUstensilesFilter {
+    font-size: 1.125rem;
+    left: 32rem;
+    position: absolute;
+    top: 1.8rem;
+}
+
 #filter {
     display: flex;
     flex-direction: column;
@@ -8,16 +22,16 @@
     width: 95%;
 }
 
-#ingredientsExample > li.list-ingredients.actived {
-    background-color: black;
-}
-
-#appareilExample > li.list-appareil.actived {
-    background-color: black;
-}
-
-#ustensilesExample > li.list-ustensilesactived {
-    background-color: black;
+#hiddenIngredientsFilter,
+#hiddenAppareilFilter,
+#hiddenUstensilesFilter {
+    border-radius: 5px;
+    color: #ffff;
+    display: none;
+    position: absolute;
+    top: 16.2rem;
+    width: 35rem;
+    z-index: 10;
 }
 
 #ingredients>button,
@@ -38,61 +52,6 @@
     width: 11rem;
 }
 
-#hiddenIngredientsFilter,
-#hiddenAppareilFilter,
-#hiddenUstensilesFilter {
-    border-radius: 5px;
-    color: #ffff;
-    display: none;
-    position: absolute;
-    top: 16.2rem;
-    width: 35rem;
-    z-index: 10;
-}
-
-#hiddenIngredientsFilter,
-#ingredients>button,
-#inputIngredients {
-    background-color: #3282F7;
-}
-
-#hiddenAppareilFilter,
-#appareil>button,
-#inputAppareil {
-    background-color: #68D9A4;
-}
-
-#hiddenUstensilesFilter,
-#ustensiles>button,
-#inputUstensiles {
-    background-color: #ED6454;
-}
-
-#inputIngredients,
-#inputAppareil,
-#inputUstensiles {
-    border: none;
-    border-radius: 5px;
-    font-family: Lato;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    height: 4.3125rem;
-    outline: none;
-    padding: 2rem;
-    width: 100%;
-    color: #ffff;
-}
-
-#closeIngredientsFilter,
-#closeAppareilFilter,
-#closeUstensilesFilter {
-    font-size: 1.125rem;
-    left: 32rem;
-    position: absolute;
-    top: 1.8rem;
-}
-
 #ingredientsExample,
 #appareilExample,
 #ustensilesExample {
@@ -101,34 +60,94 @@
     height: fit-content;
     justify-content: space-evenly;
     list-style: none;
-    padding: 0.5rem;
+    padding: .5rem;
 }
 
-#ingredientsExample > li,
-#appareilExample > li,
-#ustensilesExample > li {
-    text-align: start;
-    width: 9rem;
-    padding: .5rem 1rem;
+#ingredientsExample>li,
+#appareilExample>li,
+#ustensilesExample>li {
+    font-size: 1.21rem;
     overflow: hidden;
+    padding: .5rem 1rem;
+    text-align: start;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 1.21rem;
+    width: 9rem;
 }
 
-#ingredientsExample > li:hover {
-    background-color: #ffff;
-    color : #3282F7;
+#ingredientsExample>li.list-ingredients.activated,
+#appareilExample>li.list-appareil.activated,
+#ustensilesExample>li.list-ustensiles.activated {
+    background-color: #000;
 }
 
-#appareilExample > li:hover {
+#ingredientsExample>li:hover {
     background-color: #ffff;
-    color : #68D9A4;
+    color: #3282F7;
 }
 
-#ustensilesExample > li:hover {
+#inputIngredients,
+#inputAppareil,
+#inputUstensiles {
+    border: none;
+    border-radius: 5px;
+    color: #ffff;
+    font-family: Lato;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    height: 4.3125rem;
+    outline: none;
+    padding: 2rem;
+    width: 100%;
+}
+
+#tagsBadges {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2rem;
+}
+
+#tagsBadges>#appareilBadges,
+#hiddenAppareilFilter,
+#appareil>button,
+#inputAppareil {
+    background-color: #68D9A4;
+}
+
+#tagsBadges>#ingredientBadges,
+#hiddenIngredientsFilter,
+#ingredients>button,
+#inputIngredients {
+    background-color: #3282F7;
+}
+
+#tagsBadges>#ustensilBadges,
+#hiddenUstensilesFilter,
+#ustensiles>button,
+#inputUstensiles {
+    background-color: #ED6454;
+}
+
+#tagsBadges>div {
+    align-items: center;
+    border-radius: .25rem;
+    color: #fff;
+    cursor: default;
+    display: none;
+    justify-content: space-between;
+    margin: .25rem 1rem .25rem 0;
+    padding: .5rem 1rem;
+    width: fit-content;
+}
+
+#tagsBadges>div>span {
+    margin-right: .5rem;
+}
+
+#ustensilesExample>li:hover {
     background-color: #ffff;
-    color : #ED6454;
+    color: #ED6454;
 }
 
 @media screen and (min-width: 900px) {

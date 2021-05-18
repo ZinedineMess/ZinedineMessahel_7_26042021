@@ -1,7 +1,27 @@
+#resultMessage {
+    border: #FFF solid 1px;
+    border-radius: .3125rem;
+    display: none;
+    font-size: 1.2rem;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 1rem;
+}
+
 #searchBar {
     margin: 0 auto;
     position: relative;
     width: 95%;
+}
+
+#searchBar>i {
+    background-color: #E7E7E7;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    position: absolute;
+    right: 1rem;
+    top: 1.65rem;
 }
 
 #searchBarInput {
@@ -18,48 +38,14 @@
     width: 100%;
 }
 
-#searchBar > i {
-    background-color: #E7E7E7;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    position: absolute;
-    right: 1rem;
-    top: 1.65rem;
-}
-
-#messageInfoResultSearch {
-    background: #c4dcff;
-    border-radius: .5rem;
-    color: #032250;
-    display: flex;
-    font-size: 1.21rem;
-    height: auto;
-    justify-content: space-between;
-    overflow: hidden;
-    padding: 1rem;
-}
-
-#messageInfoNoRecipe {
-    background: #fed8b2;
-    border-radius: .5rem;
-    color: #4d2a07;
-    display: flex;
-    font-size: 1.21rem;
-    height: auto;
-    justify-content: space-between;
-    overflow: hidden;
-    padding: 1rem;
-}
-
 @media screen and (min-width: 900px) {
-    #searchBarInput {
-        height: 4.3125rem;
-    }
-
-    #searchBar > i {
+    #searchBar>i {
         font-size: 2rem;
         right: 2rem;
         top: 2.2rem;
+    }
+
+    #searchBarInput {
+        height: 4.3125rem;
     }
 }

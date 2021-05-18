@@ -1,41 +1,66 @@
 'use strict';
 
 import Utils from '../utilities/Utils.js';
-import Filters from './Filters.js';
+import Search from './Search.js';
+import RecipesBuilder from '../pages/RecipesBuilder.js';
 
 export default class Appliances {
-    static btnAppliances = document.querySelector("#appareil > button");
-    static openArrow = document.querySelector("#openAppareilFilter");
-    static closeArrow = document.querySelector("#closeAppareilFilter");
-    static hiddenFilter = document.querySelector("#hiddenAppareilFilter");
     static appliancesExample = document.getElementById('appareilExample');
+    static recipesMatched = []; // result recipes that match
+    static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
 
-    static init(resultApp) {
-        this.appliancesExample.innerHTML = '';
-        new Utils().launchInputFilters(this.btnAppliances, this.openArrow, this.closeArrow, this.hiddenFilter);
-        this.showAppliancesInInput(Utils.sortByTitle(resultApp));
+    static init(appliances, collection) {
+        Utils.launcherInput(document.querySelector("#appareil > button"),
+            document.querySelector("#openAppareilFilter"),
+            document.querySelector("#closeAppareilFilter"),
+            document.querySelector("#hiddenAppareilFilter"));
+        this.appliancesExample.innerHTML = [];
+        this.displayAppliances(Utils.sortByTitle(appliances));
+        this.searchInput(appliances);
+        this.giveTheClassActivatedOnClick(collection);
     };
 
-    static searchInput(collection) {
-        document.getElementById('inputAppareil').addEventListener('keyup', (key) => {
-            let valueSearch = key.target.value;
+    // display the appliances in the appliances zone according to the recipes displayed in the 'recipes' section
+    static displayAppliances(appliances) {
+        appliances.forEach((appliances) => {
+            let listAppliances = document.createElement('li');
 
-            if (Utils.isValid(valueSearch)) {
-                this.init(Filters.search(collection, valueSearch));
-            } else {
-                this.init(collection);
-            }
+            listAppliances.innerHTML = `${Utils.upperText(appliances)}`
+            this.appliancesExample.appendChild(listAppliances);
+            listAppliances.classList.add('list-appareil');
+            listAppliances.setAttribute('data-filter', `${appliances}`);
         });
     };
 
-    static showAppliancesInInput(appliances) {
-        appliances.forEach((appliance) => {
-            let listAppliances = document.createElement('li');
+    // allows to search for the appliances in the input from the appliances present in the recipes displayed
+    static searchInput(appliances) {
+        document.getElementById('inputAppareil').addEventListener('keyup', (key) => {
+            let valueSearch = key.target.value;
+            if (Utils.isValid(valueSearch)) {
+                this.appliancesExample.innerHTML = [];
+                this.displayAppliances(Search.searchInputFilters(appliances, valueSearch, this.recipesMatched, this.recipesMatched));
+                return;
+            }
+            this.appliancesExample.innerHTML = [];
+            this.displayAppliances(Utils.sortByTitle(appliances));
+        });
+    };
 
-            listAppliances.innerHTML = `${Utils.upperText(appliance)}`
-            this.appliancesExample.appendChild(listAppliances);
-            listAppliances.classList.add('list-ingredients');
-            listAppliances.setAttribute('data-filter', `${appliance}`);
+    // gives the class 'activated' when an appliance is clicked
+    static giveTheClassActivatedOnClick(collection) {
+        this.appliancesExample.addEventListener('click', event => {
+            let classValue = event.target.classList.value;
+            let mainContent = document.getElementById('mainContent');
+
+            if (-1 === classValue.indexOf('activated')) {
+                mainContent.innerHTML = '';
+                event.target.classList.add('activated');
+                RecipesBuilder.buildSection(Search.searchFiltersApp(collection, this.recipesMatched, this.recipesMatchedSorted));
+            } else {
+                mainContent.innerHTML = '';
+                event.target.classList.remove('activated');
+                RecipesBuilder.buildSection(recipesApiResult);
+            }
         });
     };
 }

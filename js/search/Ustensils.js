@@ -1,40 +1,66 @@
 'use strict';
 
 import Utils from '../utilities/Utils.js';
-import Filters from './Filters.js';
+import Search from './Search.js';
+import RecipesBuilder from '../pages/RecipesBuilder.js';
 
 export default class Ustensils {
-    static btnUstensils = document.querySelector("#ustensiles > button");
-    static openArrow = document.querySelector("#openUstensilesFilter");
-    static closeArrow = document.querySelector("#closeUstensilesFilter");
-    static hiddenFilter = document.querySelector("#hiddenUstensilesFilter");
     static ustensilsExample = document.getElementById('ustensilesExample');
+    static recipesMatched = []; // result recipes that match
+    static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
 
-    static init(resultUst) {
-        this.ustensilsExample.innerHTML = '';
-        new Utils().launchInputFilters(this.btnUstensils, this.openArrow, this.closeArrow, this.hiddenFilter);
-        this.showUstensilsInInput(Utils.sortByTitle(resultUst));
+    static init(ustensils, collection) {
+        Utils.launcherInput(document.querySelector("#ustensiles > button"),
+            document.querySelector("#openUstensilesFilter"),
+            document.querySelector("#closeUstensilesFilter"),
+            document.querySelector("#hiddenUstensilesFilter"));
+        this.ustensilsExample.innerHTML = [];
+        this.displayUstensils(Utils.sortByTitle(ustensils));
+        this.searchInput(ustensils);
+        this.giveTheClassActivatedOnClick(collection);
     };
 
-    static searchInput(collection) {
-        document.getElementById('inputUstensiles').addEventListener('keyup', (key) => {
-            let valueSearch = key.target.value;
-            if (Utils.isValid(valueSearch)) {
-                this.init(Filters.search(collection, valueSearch));
-            } else {
-                this.init(collection);
-            }
+    // display the ustensils in the ustensils zone according to the recipes displayed in the 'recipes' section
+    static displayUstensils(ustensils) {
+        ustensils.forEach((ustensils) => {
+            let listUstensils = document.createElement('li');
+
+            listUstensils.innerHTML = `${Utils.upperText(ustensils)}`
+            this.ustensilsExample.appendChild(listUstensils);
+            listUstensils.classList.add('list-ustensiles');
+            listUstensils.setAttribute('data-filter', `${ustensils}`);
         });
     };
 
-    static showUstensilsInInput(ustensils) {
-        ustensils.forEach((ustensil) => {
-            let listUstensils = document.createElement('li');
+    // allows to search for the ustensils in the input from the ustensils present in the recipes displayed
+    static searchInput(ustensils) {
+        document.getElementById('inputUstensiles').addEventListener('keyup', (key) => {
+            let valueSearch = key.target.value;
+            if (Utils.isValid(valueSearch)) {
+                this.ustensilsExample.innerHTML = [];
+                this.displayUstensils(Search.searchInputFilters(ustensils, valueSearch, this.recipesMatched, this.recipesMatched));
+                return;
+            }
+            this.ustensilsExample.innerHTML = [];
+            this.displayUstensils(Utils.sortByTitle(ustensils));
+        });
+    };
 
-            listUstensils.innerHTML = `${Utils.upperText(ustensil)}`
-            this.ustensilsExample.appendChild(listUstensils);
-            listUstensils.classList.add('list-ingredients');
-            listUstensils.setAttribute('data-filter', `${ustensil}`);
+    // gives the class 'activated' when an ustensil is clicked
+    static giveTheClassActivatedOnClick(collection) {
+        this.ustensilsExample.addEventListener('click', event => {
+            let classValue = event.target.classList.value;
+            let mainContent = document.getElementById('mainContent');
+
+            if (-1 === classValue.indexOf('activated')) {
+                mainContent.innerHTML = '';
+                event.target.classList.add('activated');
+                RecipesBuilder.buildSection(Search.searchFiltersUst(collection, this.recipesMatched, this.recipesMatchedSorted));
+            } else {
+                mainContent.innerHTML = '';
+                event.target.classList.remove('activated');
+                RecipesBuilder.buildSection(recipesApiResult);
+            }
         });
     };
 }

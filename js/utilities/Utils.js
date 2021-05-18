@@ -15,11 +15,6 @@ export default class Utils {
         return arraySort;
     };
 
-    // search starts from 3 characters
-    static isValid(value) {
-        return value.length > 2;
-    };
-
     // transform the text into lowercase
     static normalizeText(text) {
         return text
@@ -42,27 +37,46 @@ export default class Utils {
             .replace(/[\u0300-\u036f]/g, "");
     };
 
-    // Open the ingredients/appliance/ustensils menu
-    launchInputFilters(btn, openArrow, closeArrow, hiddenPart) {
+    // search starts from 3 characters
+    static isValid(value) {
+        return value.length > 2;
+    };
+
+    // Open/Close the ingredients/appliance/ustensils menu
+    static launcherInput(btn, open, close, hiddenPart) {
+        // open
         btn.addEventListener('click', () => {
             btn.style.width = "35rem";
-            openArrow.style.display = 'none';
+            open.style.display = 'none';
             hiddenPart.style.display = 'block';
         })
 
-        this.closeInputFilters(btn, openArrow, closeArrow, hiddenPart);
-
-        return this;
-    };
-
-    // Close the ingredients/appliance/ustensils menu
-    closeInputFilters(btn, openArrow, closeArrow, hiddenPart) {
-        closeArrow.addEventListener('click', () => {
+        // close
+        close.addEventListener('click', () => {
             btn.style.width = "11rem";
-            openArrow.style.display = 'block';
+            open.style.display = 'block';
             hiddenPart.style.display = 'none';
         })
 
         return this;
     };
+
+    // removed duplicate recipes
+    static removeDuplicatesRecipes(array, arraySorted) {
+        arraySorted = [...new Set(array)];
+
+        return arraySorted;
+    };
+
+    // get the elements holding the 'activated' class
+    static getFiltersWithClassActivated() {
+        let currentFilters = document.querySelectorAll('li.activated');
+        let filterSelected = [];
+
+        currentFilters.forEach(function (currentFilter) {
+            filterSelected.push(currentFilter.getAttribute("data-filter"));
+        });
+
+        return filterSelected;
+    }
 }

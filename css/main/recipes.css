@@ -4,7 +4,7 @@
     justify-content: space-evenly;
 }
 
-#mainContent > article {
+#mainContent>article {
     background-color: #E7E7E7;
     border-radius: .3125rem;
     height: auto;
@@ -15,12 +15,29 @@
     width: 23.75rem;
 }
 
-#mainContent > article > img {
-    height: 11.125rem;
-    width: 23.75rem;
+#mainContent>article>div.recipeInfo {
+    display: flex;
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
-#mainContent > article > div.recipeTitle {
+#mainContent>article>div.recipeInfo>div.recipeIngredients>p {
+    font-size: .8rem;
+    margin: .125rem 0;
+}
+
+#mainContent>article>div.recipeInfo>div.recipeIngredients,
+#mainContent>article>div.recipeInfo>div.recipeInstructions {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    display: -webkit-box;
+    font-size: .8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 50%;
+}
+
+#mainContent>article>div.recipeTitle {
     align-items: center;
     background-color: #E7E7E7;
     display: flex;
@@ -32,34 +49,17 @@
     white-space: nowrap;
 }
 
-#mainContent > article > div.recipeTitle > h2,
-#mainContent > article > div.recipeTitle > span {
+#mainContent>article>div.recipeTitle>h2,
+#mainContent>article>div.recipeTitle>span {
     font-size: 1.2rem;
     font-weight: 700;
 }
 
-#mainContent > article > div.recipeTitle > span > i {
+#mainContent>article>div.recipeTitle>span>i {
     margin-right: .3rem;
 }
 
-#mainContent > article > div.recipeInfo {
-    display: flex;
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
-#mainContent > article > div.recipeInfo > div.recipeIngredients,
-#mainContent > article > div.recipeInfo > div.recipeInstructions {
-    width: 50%;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 7;
-    display: -webkit-box;
-    font-size: .8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-#mainContent > article > div.recipeInfo > div.recipeIngredients > p {
-    font-size: .8rem;
-    margin: .125rem 0;
+#mainContent>article>img {
+    height: 11.125rem;
+    width: 23.75rem;
 }

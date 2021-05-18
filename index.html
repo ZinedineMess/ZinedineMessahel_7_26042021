@@ -6,7 +6,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Les petis plats</title>
-    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dlpyn3wxf/image/upload/v1620663918/icon_akzhyp.png" />
+    <link rel="icon" type="image/png"
+        href="https://res.cloudinary.com/dlpyn3wxf/image/upload/v1620663918/icon_akzhyp.png" />
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.15.1/css/all.css'>
     <link rel='stylesheet' href='./css/style.css'>
     <script src='./js/provider/recipesData.js'></script>
@@ -26,10 +27,19 @@
                 placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette"
                 aria-label="Search through site content">
             <i class="fas fa-search"></i>
+            <!-- Dynamic search result message: -->
+            <aside id="resultMessage">
+                <span>Aucun résultat</span>
+                <i class="far fa-times-circle"></i>
+            </aside>
         </form>
 
-        <!-- CLICKED TAGS BOX -->
-        <div id="tagsBadges"></div>
+        <!-- Badges added dynamically: -->
+        <nav id="tagsBadges">
+            <span id="ingredientBadges"></span>
+            <span id="appareilBadges"></span>
+            <span id="ustensileBadges"></span>
+        </nav>
 
         <!-- FILTER -->
         <section id="filter">

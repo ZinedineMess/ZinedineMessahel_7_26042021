@@ -1,6 +1,12 @@
 'use strict';
 
-export default class RecipesBuilder {
+export default class Builder {
+    static resultMessage = document.getElementById('resultMessage'); 
+    static resultSpan = document.querySelector("#resultMessage > span");
+    static hiddenIngredientsFilter = document.querySelector("#hiddenIngredientsFilter");
+    static hiddenAppareilFilter = document.querySelector("#hiddenAppareilFilter");
+    static hiddenUstensilesFilter = document.querySelector("#hiddenUstensilesFilter");
+
     // build the section containing the recipes to display
     static buildSection(collections) {
         return collections.forEach(collection => {
@@ -23,7 +29,7 @@ export default class RecipesBuilder {
         article.classList.add('articleRecipes');
         article.setAttribute('data-filter', dataFilter);
         article.innerHTML = this.getArticleInnerHTML(collection);
-        
+
         return article;
     };
 
@@ -46,4 +52,36 @@ export default class RecipesBuilder {
             </div>
         `;
     };
+
+    // displays the message with the number of recipes corresponding to the search
+    static buildResultMessageWithResult(recipes) {
+        this.launchResultMessage();
+        this.resultMessage.style.backgroundColor = "#c4dcff"
+        this.resultSpan.innerHTML = recipes.length + " recette(s) correspond(ent) à votre recherche";
+        return this;
+    }
+
+    // displays the message indicating to the user that no recipe matches the search
+    static buildResultMessageWithNoResult() {
+        this.launchResultMessage();
+        this.resultMessage.style.backgroundColor = "#fed8b2";
+        this.resultSpan.innerHTML = "Aucune recette ne correspond à votre recherche... Vous pouvez chercher 'tarte aux pommes', 'poisson', etc.";
+        return this;
+    }
+
+    static launchResultMessage() {
+        this.hiddenIngredientsFilter.style.top = "20rem";
+        this.hiddenAppareilFilter.style.top = "20rem";
+        this.hiddenUstensilesFilter.style.top = "20rem";
+
+        return this.resultMessage.style.display = 'flex';
+    }
+
+    static removeResultMessage() {
+        this.hiddenIngredientsFilter.style.top = "16.2rem";
+        this.hiddenAppareilFilter.style.top = "16.2rem";
+        this.hiddenUstensilesFilter.style.top = "16.2rem";
+
+        return this.resultMessage.style.display = 'none';
+    }
 }
