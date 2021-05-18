@@ -122,27 +122,29 @@
     background-color: #3282F7;
 }
 
-#tagsBadges>#ustensilBadges,
+#tagsBadges>#ustensileBadges,
 #hiddenUstensilesFilter,
 #ustensiles>button,
 #inputUstensiles {
     background-color: #ED6454;
 }
 
-#tagsBadges>div {
+#tagsBadges>span {
     align-items: center;
     border-radius: .25rem;
     color: #fff;
     cursor: default;
     display: none;
     justify-content: space-between;
-    margin: .25rem 1rem .25rem 0;
+    margin: 0.5rem 1rem .25rem 0;
     padding: .5rem 1rem;
     width: fit-content;
 }
 
-#tagsBadges>div>span {
-    margin-right: .5rem;
+#ingredientBadges > i,
+#appareilBadges > i,
+#ustensileBadges > i {
+    margin-left : 0.5rem;
 }
 
 #ustensilesExample>li:hover {

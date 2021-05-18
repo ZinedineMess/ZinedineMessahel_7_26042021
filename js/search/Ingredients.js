@@ -8,6 +8,7 @@ export default class Ingredients {
     static ingredientsExample = document.getElementById('ingredientsExample');
     static recipesMatched = []; // result recipes that match
     static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
+    static ingredientBadges = document.querySelector("#ingredientBadges");
 
     static init(ingredients, collection) {
         Utils.launcherInput(document.querySelector("#ingredients > button"),
@@ -56,10 +57,12 @@ export default class Ingredients {
                 event.target.classList.add('activated');
                 mainContent.innerHTML = '';
                 RecipesBuilder.buildSection(Search.searchFiltersIng(collection, this.recipesMatched, this.recipesMatchedSorted));
+                RecipesBuilder.buildTags(this.ingredientBadges, Utils.upperText(event.target.getAttribute('data-filter')))
             } else {
                 event.target.classList.remove('activated');
                 mainContent.innerHTML = '';
                 RecipesBuilder.buildSection(recipesApiResult);
+                RecipesBuilder.removeTag(this.ingredientBadges);
             }
         });
     };

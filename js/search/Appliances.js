@@ -8,6 +8,7 @@ export default class Appliances {
     static appliancesExample = document.getElementById('appareilExample');
     static recipesMatched = []; // result recipes that match
     static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
+    static appareilBadges = document.querySelector("#appareilBadges");
 
     static init(appliances, collection) {
         Utils.launcherInput(document.querySelector("#appareil > button"),
@@ -56,10 +57,12 @@ export default class Appliances {
                 mainContent.innerHTML = '';
                 event.target.classList.add('activated');
                 RecipesBuilder.buildSection(Search.searchFiltersApp(collection, this.recipesMatched, this.recipesMatchedSorted));
+                RecipesBuilder.buildTags(this.appareilBadges, Utils.upperText(event.target.getAttribute('data-filter')))
             } else {
                 mainContent.innerHTML = '';
                 event.target.classList.remove('activated');
                 RecipesBuilder.buildSection(recipesApiResult);
+                RecipesBuilder.removeTag(this.appareilBadges);
             }
         });
     };

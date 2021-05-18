@@ -8,6 +8,7 @@ export default class Ustensils {
     static ustensilsExample = document.getElementById('ustensilesExample');
     static recipesMatched = []; // result recipes that match
     static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
+    static ustensileBadges = document.querySelector("#ustensileBadges");
 
     static init(ustensils, collection) {
         Utils.launcherInput(document.querySelector("#ustensiles > button"),
@@ -56,10 +57,12 @@ export default class Ustensils {
                 mainContent.innerHTML = '';
                 event.target.classList.add('activated');
                 RecipesBuilder.buildSection(Search.searchFiltersUst(collection, this.recipesMatched, this.recipesMatchedSorted));
+                RecipesBuilder.buildTags(this.ustensileBadges, Utils.upperText(event.target.getAttribute('data-filter')))
             } else {
                 mainContent.innerHTML = '';
                 event.target.classList.remove('activated');
                 RecipesBuilder.buildSection(recipesApiResult);
+                RecipesBuilder.removeTag(this.ustensileBadges);
             }
         });
     };

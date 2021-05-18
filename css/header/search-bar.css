@@ -4,6 +4,9 @@
     display: none;
     font-size: 1.2rem;
     justify-content: space-between;
+    margin-bottom : 2rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
     overflow: hidden;
     padding: 1rem;
 }
