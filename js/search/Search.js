@@ -26,7 +26,7 @@ export default class Search {
         this.recipesMatched = []; // refresh recipesMatched
         this.searchByName(value) &&
             this.searchByDescription(value) &&
-            this.searchByIngredients(value);
+                this.searchByIngredients(value);
     };
 
     static searchByName(value) {
@@ -68,53 +68,32 @@ export default class Search {
     };
 
     // search by input for ingredients/appliances/ustensils
-    static searchInputFilters(collection, value, matched, matchedSorted) {
+    static searchInputFilters(collection, value) {
+        let matched = [];
         collection.forEach(elt => {
             if (Utils.normalizeText(elt).includes(Utils.normalizeText(value))) {
                 matched.push(elt);
             }
         });
 
-        return Utils.removeDuplicatesRecipes(matched, matchedSorted);
+        return matched;
     };
 
-    // search by click for ingredients in the ingredients area
-    static searchFiltersIng(collection, matched, matchedSorted) {
-        let filters = Utils.getFiltersWithClassActivated(); // get the elements holding the 'activated' class
-        collection.forEach(recipe => {
-            recipe.ingredients.forEach(ing => {
-                if (Utils.normalizeText(ing.ingredient).includes(filters)) {
-                    matched.push(recipe);
-                }
-            })
-        });
+    static filters() {
+        let selected = Utils.getFiltersWithClassActivated();
+        let matched = [];
+        let notMatched = [];
 
-        return Utils.removeDuplicatesRecipes(matched, matchedSorted);
-    }
+        document.querySelectorAll("#mainContent > article").forEach(article => {
+            if(Utils.normalizeText(article.getAttribute('data-filter')).includes(selected)) {
+                matched.push(article);
+            } else if (!Utils.normalizeText(article.getAttribute('data-filter')).includes(selected))
+            notMatched.push(article);
+        })
 
-    // search by click for appliances in the ingredients area
-    static searchFiltersApp(collection, matched, matchedSorted) {
-        let filters = Utils.getFiltersWithClassActivated(); // get the elements holding the 'activated' class
-        collection.forEach(recipe => {
-            if (Utils.normalizeText(recipe.appliance).includes(filters)) {
-                matched.push(recipe);
-            }
-        });
-
-        return Utils.removeDuplicatesRecipes(matched, matchedSorted);
-    }
-
-    // search by click for ustensils in the ingredients area
-    static searchFiltersUst(collection, matched, matchedSorted) {
-        let filters = Utils.getFiltersWithClassActivated(); // get the elements holding the 'activated' class
-        collection.forEach(recipe => {
-            recipe.ustensils.forEach(ust => {
-                if (Utils.normalizeText(ust).includes(filters)) {
-                    matched.push(recipe);
-                }
-            })
-        });
-
-        return Utils.removeDuplicatesRecipes(matched, matchedSorted);
+        return {
+            'show': matched,
+            'hide': notMatched
+        };
     }
 }

@@ -3,22 +3,22 @@
 import Utils from '../utilities/Utils.js';
 import Search from './Search.js';
 import RecipesBuilder from '../pages/RecipesBuilder.js';
+import Badges from '../pages/Badges.js';
+import Message from '../pages/Messages.js';
 
 export default class Appliances {
     static appliancesExample = document.getElementById('appareilExample');
-    static recipesMatched = []; // result recipes that match
-    static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
-    static appareilBadges = document.querySelector("#appareilBadges");
+    static appareilBadges = document.getElementById('appareilBadges');
 
-    static init(appliances, collection) {
+    static init(appliances) {
         Utils.launcherInput(document.querySelector("#appareil > button"),
             document.querySelector("#openAppareilFilter"),
             document.querySelector("#closeAppareilFilter"),
             document.querySelector("#hiddenAppareilFilter"));
-        this.appliancesExample.innerHTML = [];
+        Utils.clearFilters(this.appliancesExample);
         this.displayAppliances(Utils.sortByTitle(appliances));
         this.searchInput(appliances);
-        this.giveTheClassActivatedOnClick(collection);
+        this.giveTheClassActivatedOnClick();
     };
 
     // display the appliances in the appliances zone according to the recipes displayed in the 'recipes' section
@@ -38,32 +38,49 @@ export default class Appliances {
         document.getElementById('inputAppareil').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
             if (Utils.isValid(valueSearch)) {
-                this.appliancesExample.innerHTML = [];
-                this.displayAppliances(Search.searchInputFilters(appliances, valueSearch, this.recipesMatched, this.recipesMatched));
+                Utils.clearFilters(this.appliancesExample);
+                this.displayAppliances(Search.searchInputFilters(appliances, valueSearch));
                 return;
             }
-            this.appliancesExample.innerHTML = [];
+            Utils.clearFilters(this.appliancesExample);
             this.displayAppliances(Utils.sortByTitle(appliances));
         });
     };
 
-    // gives the class 'activated' when an appliance is clicked
-    static giveTheClassActivatedOnClick(collection) {
+    static giveTheClassActivatedOnClick() {
         this.appliancesExample.addEventListener('click', event => {
             let classValue = event.target.classList.value;
-            let mainContent = document.getElementById('mainContent');
 
             if (-1 === classValue.indexOf('activated')) {
-                mainContent.innerHTML = '';
                 event.target.classList.add('activated');
-                RecipesBuilder.buildSection(Search.searchFiltersApp(collection, this.recipesMatched, this.recipesMatchedSorted));
-                RecipesBuilder.buildTags(this.appareilBadges, Utils.upperText(event.target.getAttribute('data-filter')))
-            } else {
-                mainContent.innerHTML = '';
-                event.target.classList.remove('activated');
-                RecipesBuilder.buildSection(recipesApiResult);
-                RecipesBuilder.removeTag(this.appareilBadges);
+                this.filterTags();
+                Badges.buildTags(this.appareilBadges, Utils.upperText(event.target.getAttribute('data-filter')));
+                Message.removeResultMessage();
+                return;
             }
+            event.target.classList.remove('activated');
+            Utils.clearRecipesSection();
+            Badges.removeTag(this.appareilBadges);
+            RecipesBuilder.buildSection(recipesApiResult);
+            return;
         });
     };
+
+    static filterTags() {
+        let resultFilters = Search.filters();
+        this.show(resultFilters.show);
+        this.hide(resultFilters.hide);
+    };
+
+    static show(elt) {
+        elt.forEach(s => {
+            s.style.display = 'block';
+        });
+    }
+
+    static hide(elt) {
+        return elt.forEach(h => {
+            h.style.display = 'none';
+        });
+    }
 }

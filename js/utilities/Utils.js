@@ -61,11 +61,12 @@ export default class Utils {
         return this;
     };
 
-    // removed duplicate recipes
-    static removeDuplicatesRecipes(array, arraySorted) {
-        arraySorted = [...new Set(array)];
+    static clearRecipesSection() {
+        return document.getElementById('mainContent').innerHTML = '';
+    }
 
-        return arraySorted;
+    static clearFilters(elt) {
+        return elt.innerHTML = '';
     };
 
     // get the elements holding the 'activated' class
@@ -74,9 +75,9 @@ export default class Utils {
         let filterSelected = [];
 
         currentFilters.forEach(function (currentFilter) {
-            filterSelected.push(currentFilter.getAttribute("data-filter"));
+            filterSelected.push(Utils.normalizeText(currentFilter.getAttribute("data-filter")));
         });
 
         return filterSelected;
-    }
+    };
 }

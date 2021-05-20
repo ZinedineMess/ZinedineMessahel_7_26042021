@@ -3,22 +3,22 @@
 import Utils from '../utilities/Utils.js';
 import Search from './Search.js';
 import RecipesBuilder from '../pages/RecipesBuilder.js';
+import Badges from '../pages/Badges.js';
+import Message from '../pages/Messages.js';
 
 export default class Ustensils {
     static ustensilsExample = document.getElementById('ustensilesExample');
-    static recipesMatched = []; // result recipes that match
-    static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
-    static ustensileBadges = document.querySelector("#ustensileBadges");
+    static ustensileBadges = document.getElementById('ustensileBadges');
 
-    static init(ustensils, collection) {
+    static init(ustensils) {
         Utils.launcherInput(document.querySelector("#ustensiles > button"),
             document.querySelector("#openUstensilesFilter"),
             document.querySelector("#closeUstensilesFilter"),
             document.querySelector("#hiddenUstensilesFilter"));
-        this.ustensilsExample.innerHTML = [];
+        Utils.clearFilters(this.ustensilsExample);
         this.displayUstensils(Utils.sortByTitle(ustensils));
         this.searchInput(ustensils);
-        this.giveTheClassActivatedOnClick(collection);
+        this.giveTheClassActivatedOnClick();
     };
 
     // display the ustensils in the ustensils zone according to the recipes displayed in the 'recipes' section
@@ -38,32 +38,49 @@ export default class Ustensils {
         document.getElementById('inputUstensiles').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
             if (Utils.isValid(valueSearch)) {
-                this.ustensilsExample.innerHTML = [];
-                this.displayUstensils(Search.searchInputFilters(ustensils, valueSearch, this.recipesMatched, this.recipesMatched));
+                Utils.clearFilters(this.ustensilsExample);
+                this.displayUstensils(Search.searchInputFilters(ustensils, valueSearch));
                 return;
             }
-            this.ustensilsExample.innerHTML = [];
+            Utils.clearFilters(this.ustensilsExample);
             this.displayUstensils(Utils.sortByTitle(ustensils));
         });
     };
 
-    // gives the class 'activated' when an ustensil is clicked
-    static giveTheClassActivatedOnClick(collection) {
+    static giveTheClassActivatedOnClick() {
         this.ustensilsExample.addEventListener('click', event => {
             let classValue = event.target.classList.value;
-            let mainContent = document.getElementById('mainContent');
 
             if (-1 === classValue.indexOf('activated')) {
-                mainContent.innerHTML = '';
                 event.target.classList.add('activated');
-                RecipesBuilder.buildSection(Search.searchFiltersUst(collection, this.recipesMatched, this.recipesMatchedSorted));
-                RecipesBuilder.buildTags(this.ustensileBadges, Utils.upperText(event.target.getAttribute('data-filter')))
-            } else {
-                mainContent.innerHTML = '';
-                event.target.classList.remove('activated');
-                RecipesBuilder.buildSection(recipesApiResult);
-                RecipesBuilder.removeTag(this.ustensileBadges);
+                this.filterTags();
+                Badges.buildTags(this.ustensileBadges, Utils.upperText(event.target.getAttribute('data-filter')));
+                Message.removeResultMessage();
+                return;
             }
+            event.target.classList.remove('activated');
+            Utils.clearRecipesSection();
+            Badges.removeTag(this.ustensileBadges);
+            RecipesBuilder.buildSection(recipesApiResult);
+            return;
         });
     };
+
+    static filterTags() {
+        let resultFilters = Search.filters();
+        this.show(resultFilters.show);
+        this.hide(resultFilters.hide);
+    };
+
+    static show(elt) {
+        elt.forEach(s => {
+            s.style.display = 'block';
+        });
+    }
+
+    static hide(elt) {
+        return elt.forEach(h => {
+            h.style.display = 'none';
+        });
+    }
 }

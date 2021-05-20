@@ -141,10 +141,10 @@
     width: fit-content;
 }
 
-#ingredientBadges > i,
-#appareilBadges > i,
-#ustensileBadges > i {
-    margin-left : 0.5rem;
+#ingredientBadges>i,
+#appareilBadges>i,
+#ustensileBadges>i {
+    margin-left: 0.5rem;
 }
 
 #ustensilesExample>li:hover {
