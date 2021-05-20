@@ -1,5 +1,7 @@
 'use strict';
 
+import Utils from '../utilities/Utils.js';
+
 export default class Builder {
     // build the section containing the recipes to display
     static buildSection(collections) {
@@ -21,7 +23,7 @@ export default class Builder {
         let dataFilter = collection.ingredients.map(element => element.ingredient) + collection.ustensils + collection.appliance;
 
         article.classList.add('articleRecipes');
-        article.setAttribute('data-filter', dataFilter);
+        article.setAttribute('data-filter', Utils.normalizeText(dataFilter));
         article.innerHTML = this.getArticleInnerHTML(collection);
 
         return article;

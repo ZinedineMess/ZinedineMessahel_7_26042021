@@ -11,9 +11,15 @@ import Message from './pages/Messages.js';
 
 // Build by default without search
 Builder.buildSection(recipesApiResult);
-Ingredients.init(DataLogic.getAllIngredients(recipesApiResult));
-Appliances.init(DataLogic.getAllAppliances(recipesApiResult));
-Ustensils.init(DataLogic.getAllUstensils(recipesApiResult));
+Ingredients // Ingredients logic
+    .init(DataLogic.getAllIngredients(recipesApiResult))
+    .filterByTags();
+Appliances // Appliances logic
+    .init(DataLogic.getAllAppliances(recipesApiResult))
+    .filterByTags();
+Ustensils // Ustensils logic
+    .init(DataLogic.getAllUstensils(recipesApiResult))
+    .filterByTags();
 
 // Build with search Input
 document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
@@ -21,7 +27,6 @@ document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
     let result = Search.search(valueSearch);
 
     Utils.clearRecipesSection();
-
     if (Utils.isValid(valueSearch)) {
         if (result.recipesMatchedSorted.length === 0) {
             return Message.buildResultMessageWithNoResult();
@@ -29,9 +34,12 @@ document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
         Utils.clearRecipesSection();
         Message.buildResultMessageWithResult(result.recipesMatchedSorted);
         Builder.buildSection(result.recipesMatchedSorted);
-        Ingredients.init(result.ingredients); // Ingredients logic
-        Appliances.init(result.appliances); // Appliances logic
-        Ustensils.init(result.ustensils); // Ustensils logic
+        // Ingredients logic
+        Ingredients.init(result.ingredients);
+        // Appliances logic
+        Appliances.init(result.appliances);
+        // Ustensils logic
+        Ustensils.init(result.ustensils);
     } else {
         Utils.clearRecipesSection();
         Message.removeResultMessage();

@@ -8,7 +8,6 @@ import Message from '../pages/Messages.js';
 
 export default class Ustensils {
     static ustensilsExample = document.getElementById('ustensilesExample');
-    static ustensileBadges = document.getElementById('ustensileBadges');
 
     static init(ustensils) {
         Utils.launcherInput(document.querySelector("#ustensiles > button"),
@@ -18,7 +17,7 @@ export default class Ustensils {
         Utils.clearFilters(this.ustensilsExample);
         this.displayUstensils(Utils.sortByTitle(ustensils));
         this.searchInput(ustensils);
-        this.giveTheClassActivatedOnClick();
+        return this;
     };
 
     // display the ustensils in the ustensils zone according to the recipes displayed in the 'recipes' section
@@ -47,40 +46,32 @@ export default class Ustensils {
         });
     };
 
-    static giveTheClassActivatedOnClick() {
+    // gives the activated class to the selected tag and searches if it is present in the recipes
+    static filterByTags() {
         this.ustensilsExample.addEventListener('click', event => {
             let classValue = event.target.classList.value;
+            let ustensileBadges = document.getElementById('ustensileBadges');
 
             if (-1 === classValue.indexOf('activated')) {
                 event.target.classList.add('activated');
-                this.filterTags();
-                Badges.buildTags(this.ustensileBadges, Utils.upperText(event.target.getAttribute('data-filter')));
+                this.searchAndDisplayRecipesFiltered();
+                Badges.buildTags(ustensileBadges, Utils.upperText(event.target.getAttribute('data-filter')));
                 Message.removeResultMessage();
                 return;
             }
             event.target.classList.remove('activated');
             Utils.clearRecipesSection();
-            Badges.removeTag(this.ustensileBadges);
+            Badges.removeTag(ustensileBadges);
             RecipesBuilder.buildSection(recipesApiResult);
             return;
         });
+        return this;
     };
 
-    static filterTags() {
-        let resultFilters = Search.filters();
-        this.show(resultFilters.show);
-        this.hide(resultFilters.hide);
+    static searchAndDisplayRecipesFiltered() {
+        let resultFilters = Search.searchByTags();
+
+        Utils.showRecipesFiltered(resultFilters.show);
+        Utils.hideRecipesFiltered(resultFilters.hide);
     };
-
-    static show(elt) {
-        elt.forEach(s => {
-            s.style.display = 'block';
-        });
-    }
-
-    static hide(elt) {
-        return elt.forEach(h => {
-            h.style.display = 'none';
-        });
-    }
 }

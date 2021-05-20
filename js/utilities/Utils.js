@@ -80,4 +80,16 @@ export default class Utils {
 
         return filterSelected;
     };
+
+    static showRecipesFiltered(elt) {
+        return elt.forEach(e => {
+            e.style.display = 'block';
+        });
+    }
+
+    static hideRecipesFiltered(elt) {
+        return elt.forEach(e => {
+            e.style.display = 'none';
+        });
+    }
 }

@@ -8,7 +8,6 @@ import Message from '../pages/Messages.js';
 
 export default class Ingredients {
     static ingredientsExample = document.getElementById('ingredientsExample');
-    static ingredientBadges = document.querySelector("#ingredientBadges");
 
     static init(ingredients) {
         Utils
@@ -19,7 +18,7 @@ export default class Ingredients {
             .clearFilters(this.ingredientsExample);
         this.displayIngredients(Utils.sortByTitle(ingredients));
         this.searchInput(ingredients);
-        this.giveTheClassActivatedOnClick();
+        return this;
     };
 
     // display the ingredients in the ingredients zone according to the recipes displayed in the 'recipes' section
@@ -47,40 +46,32 @@ export default class Ingredients {
         });
     };
 
-    static giveTheClassActivatedOnClick() {
+    // gives the activated class to the selected tag and searches if it is present in the recipes
+    static filterByTags() {
         this.ingredientsExample.addEventListener('click', event => {
             let classValue = event.target.classList.value;
+            let ingredientBadges = document.querySelector("#ingredientBadges");
 
             if (-1 === classValue.indexOf('activated')) {
                 event.target.classList.add('activated');
-                this.filterTags();
-                Badges.buildTags(this.ingredientBadges, Utils.upperText(event.target.getAttribute('data-filter')));
+                this.searchAndDisplayRecipesFiltered();
+                Badges.buildTags(ingredientBadges, Utils.upperText(event.target.getAttribute('data-filter')));
                 Message.removeResultMessage();
                 return;
             }
             event.target.classList.remove('activated');
             Utils.clearRecipesSection();
-            Badges.removeTag(this.ingredientBadges);
+            Badges.removeTag(ingredientBadges);
             RecipesBuilder.buildSection(recipesApiResult);
             return;
         });
+        return this;
     };
 
-    static filterTags() {
-        let resultFilters = Search.filters();
-        this.show(resultFilters.show);
-        this.hide(resultFilters.hide);
+    static searchAndDisplayRecipesFiltered() {
+        let resultFilters = Search.searchByTags();
+
+        Utils.showRecipesFiltered(resultFilters.show);
+        Utils.hideRecipesFiltered(resultFilters.hide);
     };
-
-    static show(elt) {
-        elt.forEach(s => {
-            s.style.display = 'block';
-        });
-    }
-
-    static hide(elt) {
-        return elt.forEach(h => {
-            h.style.display = 'none';
-        });
-    }
 }

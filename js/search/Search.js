@@ -4,7 +4,6 @@ import Utils from '../utilities/Utils.js';
 import DataLogic from '../utilities/DataLogic.js';
 
 export default class Search {
-    static recipes = recipesApiResult; // all recipes
     static recipesMatched = []; // result recipes that match
     static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
 
@@ -26,11 +25,11 @@ export default class Search {
         this.recipesMatched = []; // refresh recipesMatched
         this.searchByName(value) &&
             this.searchByDescription(value) &&
-                this.searchByIngredients(value);
+            this.searchByIngredients(value);
     };
 
     static searchByName(value) {
-        this.recipes.forEach(recipe => {
+        recipesApiResult.forEach(recipe => {
             if (Utils.normalizeText(recipe.name).includes(Utils.normalizeText(value))) {
                 this.recipesMatched = [];
                 this.recipesMatched.push(recipe);
@@ -41,7 +40,7 @@ export default class Search {
     };
 
     static searchByDescription(value) {
-        this.recipes.forEach(recipe => {
+        recipesApiResult.forEach(recipe => {
             if (Utils.normalizeText(recipe.description).includes(Utils.normalizeText(value))) {
                 this.recipesMatched.push(recipe);
             }
@@ -51,7 +50,7 @@ export default class Search {
     };
 
     static searchByIngredients(value) {
-        this.recipes.forEach(recipe => {
+        recipesApiResult.forEach(recipe => {
             if (recipe.ingredients.some(elt => Utils.normalizeText(elt.ingredient).includes(value))) {
                 this.recipesMatched.push(recipe);
             }
@@ -79,16 +78,17 @@ export default class Search {
         return matched;
     };
 
-    static filters() {
+    // search if the selected tag is in the recipes found in the recipe section
+    static searchByTags() {
         let selected = Utils.getFiltersWithClassActivated();
         let matched = [];
         let notMatched = [];
 
         document.querySelectorAll("#mainContent > article").forEach(article => {
-            if(Utils.normalizeText(article.getAttribute('data-filter')).includes(selected)) {
+            if (Utils.normalizeText(article.getAttribute('data-filter')).includes(selected)) {
                 matched.push(article);
             } else if (!Utils.normalizeText(article.getAttribute('data-filter')).includes(selected))
-            notMatched.push(article);
+                notMatched.push(article);
         })
 
         return {
