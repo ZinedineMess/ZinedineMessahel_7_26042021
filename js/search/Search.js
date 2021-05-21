@@ -87,8 +87,9 @@ export default class Search {
         document.querySelectorAll("#mainContent > article").forEach(article => {
             if (Utils.normalizeText(article.getAttribute('data-filter')).includes(selected)) {
                 matched.push(article);
-            } else if (!Utils.normalizeText(article.getAttribute('data-filter')).includes(selected))
+            } else {
                 notMatched.push(article);
+            }
         });
 
         return {
