@@ -26,7 +26,7 @@ export default class Search {
         this.searchByName(value) &&
             this.searchByDescription(value) &&
             this.searchByIngredients(value);
-    };
+    }
 
     static searchByName(value) {
         recipesApiResult.forEach(recipe => {
@@ -34,37 +34,37 @@ export default class Search {
                 this.recipesMatched = [];
                 this.recipesMatched.push(recipe);
             }
-        })
+        });
 
         return this.recipesMatched;
-    };
+    }
 
     static searchByDescription(value) {
         recipesApiResult.forEach(recipe => {
             if (Utils.normalizeText(recipe.description).includes(Utils.normalizeText(value))) {
                 this.recipesMatched.push(recipe);
             }
-        })
+        });
 
         return this.recipesMatched;
-    };
+    }
 
     static searchByIngredients(value) {
         recipesApiResult.forEach(recipe => {
             if (recipe.ingredients.some(elt => Utils.normalizeText(elt.ingredient).includes(value))) {
                 this.recipesMatched.push(recipe);
             }
-        })
+        });
 
         return this.recipesMatched;
-    };
+    }
 
     // removed duplicate recipes
     static removeDuplicatesRecipes() {
         this.recipesMatchedSorted = [...new Set(this.recipesMatched)];
 
         return this.recipesMatchedSorted;
-    };
+    }
 
     // search by input for ingredients/appliances/ustensils
     static searchInputFilters(collection, value) {
@@ -76,7 +76,7 @@ export default class Search {
         });
 
         return matched;
-    };
+    }
 
     // search if the selected tag is in the recipes found in the recipe section
     static searchByTags() {
@@ -89,7 +89,7 @@ export default class Search {
                 matched.push(article);
             } else if (!Utils.normalizeText(article.getAttribute('data-filter')).includes(selected))
                 notMatched.push(article);
-        })
+        });
 
         return {
             'show': matched,

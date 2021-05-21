@@ -13,7 +13,7 @@ export default class Utils {
         })
 
         return arraySort;
-    };
+    }
 
     // transform the text into lowercase
     static normalizeText(text) {
@@ -21,7 +21,7 @@ export default class Utils {
             .toLowerCase()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "");
-    };
+    }
 
     // transform the text into uppercase
     static upperText(text) {
@@ -35,12 +35,12 @@ export default class Utils {
             .toLowerCase()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "");
-    };
+    }
 
     // search starts from 3 characters
     static isValid(value) {
         return value.length > 2;
-    };
+    }
 
     // Open/Close the ingredients/appliance/ustensils menu
     static launcherInput(btn, open, close, hiddenPart) {
@@ -49,17 +49,17 @@ export default class Utils {
             btn.style.width = "35rem";
             open.style.display = 'none';
             hiddenPart.style.display = 'block';
-        })
+        });
 
         // close
         close.addEventListener('click', () => {
             btn.style.width = "11rem";
             open.style.display = 'block';
             hiddenPart.style.display = 'none';
-        })
+        });
 
         return this;
-    };
+    }
 
     static clearRecipesSection() {
         return document.getElementById('mainContent').innerHTML = '';
@@ -67,7 +67,7 @@ export default class Utils {
 
     static clearFilters(elt) {
         return elt.innerHTML = '';
-    };
+    }
 
     // get the elements holding the 'activated' class
     static getFiltersWithClassActivated() {
@@ -79,7 +79,7 @@ export default class Utils {
         });
 
         return filterSelected;
-    };
+    }
 
     static showRecipesFiltered(elt) {
         return elt.forEach(e => {

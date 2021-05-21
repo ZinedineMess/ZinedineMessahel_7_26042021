@@ -18,7 +18,7 @@ export default class Appliances {
         this.displayAppliances(Utils.sortByTitle(appliances));
         this.searchInput(appliances);
         return this;
-    };
+    }
 
     // display the appliances in the appliances zone according to the recipes displayed in the 'recipes' section
     static displayAppliances(appliances) {
@@ -30,7 +30,7 @@ export default class Appliances {
             listAppliances.classList.add('list-appareil');
             listAppliances.setAttribute('data-filter', `${appliances}`);
         });
-    };
+    }
 
     // allows to search for the appliances in the input from the appliances present in the recipes displayed
     static searchInput(appliances) {
@@ -44,7 +44,7 @@ export default class Appliances {
             Utils.clearFilters(this.appliancesExample);
             this.displayAppliances(Utils.sortByTitle(appliances));
         });
-    };
+    }
 
     // gives the activated class to the selected tag and searches if it is present in the recipes
     static filterByTags() {
@@ -67,12 +67,12 @@ export default class Appliances {
             return;
         });
         return this;
-    };
+    }
 
     static searchAndDisplayRecipesFiltered() {
         let resultFilters = Search.searchByTags();
 
         Utils.showRecipesFiltered(resultFilters.show);
         Utils.hideRecipesFiltered(resultFilters.hide);
-    };
+    }
 }

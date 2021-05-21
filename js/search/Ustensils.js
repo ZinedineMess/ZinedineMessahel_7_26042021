@@ -18,7 +18,7 @@ export default class Ustensils {
         this.displayUstensils(Utils.sortByTitle(ustensils));
         this.searchInput(ustensils);
         return this;
-    };
+    }
 
     // display the ustensils in the ustensils zone according to the recipes displayed in the 'recipes' section
     static displayUstensils(ustensils) {
@@ -30,7 +30,7 @@ export default class Ustensils {
             listUstensils.classList.add('list-ustensiles');
             listUstensils.setAttribute('data-filter', `${ustensils}`);
         });
-    };
+    }
 
     // allows to search for the ustensils in the input from the ustensils present in the recipes displayed
     static searchInput(ustensils) {
@@ -44,7 +44,7 @@ export default class Ustensils {
             Utils.clearFilters(this.ustensilsExample);
             this.displayUstensils(Utils.sortByTitle(ustensils));
         });
-    };
+    }
 
     // gives the activated class to the selected tag and searches if it is present in the recipes
     static filterByTags() {
@@ -66,12 +66,12 @@ export default class Ustensils {
             return;
         });
         return this;
-    };
+    }
 
     static searchAndDisplayRecipesFiltered() {
         let resultFilters = Search.searchByTags();
 
         Utils.showRecipesFiltered(resultFilters.show);
         Utils.hideRecipesFiltered(resultFilters.hide);
-    };
+    }
 }

@@ -44,5 +44,11 @@ document.getElementById('searchBarInput').addEventListener('keyup', (key) => {
         Utils.clearRecipesSection();
         Message.removeResultMessage();
         Builder.buildSection(recipesApiResult);
-    }
+        // Ingredients logic
+        Ingredients.init(DataLogic.getAllIngredients(recipesApiResult));
+        // Appliances logic
+        Appliances.init(DataLogic.getAllAppliances(recipesApiResult));
+        // Ustensils logic
+        Ustensils.init(DataLogic.getAllUstensils(recipesApiResult));
+    };
 });

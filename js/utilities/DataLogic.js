@@ -11,7 +11,7 @@ export default class DataLogic {
             });
         });
         return ingredients;
-    };
+    }
 
     // get all the appliances to make them appear by default, before searching
     static getAllAppliances(app) {
@@ -21,7 +21,7 @@ export default class DataLogic {
                 appliances.push(recipe.appliance.toLowerCase());
         });
         return appliances;
-    };
+    }
 
     // get all the ustensils to make them appear by default, before searching
     static getAllUstensils(ust) {
@@ -33,5 +33,5 @@ export default class DataLogic {
             });
         });
         return ustensils;
-    };
+    }
 }

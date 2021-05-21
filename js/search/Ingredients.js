@@ -19,7 +19,7 @@ export default class Ingredients {
         this.displayIngredients(Utils.sortByTitle(ingredients));
         this.searchInput(ingredients);
         return this;
-    };
+    }
 
     // display the ingredients in the ingredients zone according to the recipes displayed in the 'recipes' section
     static displayIngredients(ingredients) {
@@ -31,7 +31,7 @@ export default class Ingredients {
             listIngredients.classList.add('list-ingredients');
             listIngredients.setAttribute('data-filter', `${ingredient}`);
         });
-    };
+    }
 
     // allows to search for the ingredients in the input from the ingredients present in the recipes displayed
     static searchInput(ingredients) {
@@ -44,7 +44,7 @@ export default class Ingredients {
             Utils.clearFilters(this.ingredientsExample);
             return this.displayIngredients(Utils.sortByTitle(ingredients));
         });
-    };
+    }
 
     // gives the activated class to the selected tag and searches if it is present in the recipes
     static filterByTags() {
@@ -66,12 +66,12 @@ export default class Ingredients {
             return;
         });
         return this;
-    };
+    }
 
     static searchAndDisplayRecipesFiltered() {
         let resultFilters = Search.searchByTags();
 
         Utils.showRecipesFiltered(resultFilters.show);
         Utils.hideRecipesFiltered(resultFilters.hide);
-    };
+    }
 }

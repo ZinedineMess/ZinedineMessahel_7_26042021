@@ -8,14 +8,14 @@ export default class Builder {
         return collections.forEach(collection => {
             this.buildRecipe(collection);
         });
-    };
+    }
 
     // build each recipe
     static buildRecipe(collection) {
         let section = document.getElementById('mainContent');
 
         return section.appendChild(this.createArticleElt(collection));
-    };
+    }
 
     // create the article which will contain the information of each recipe
     static createArticleElt(collection) {
@@ -27,7 +27,7 @@ export default class Builder {
         article.innerHTML = this.getArticleInnerHTML(collection);
 
         return article;
-    };
+    }
 
     static getArticleInnerHTML(collection) {
         return `
@@ -47,5 +47,5 @@ export default class Builder {
                 </div>
             </div>
         `;
-    };
+    }
 }
