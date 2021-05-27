@@ -3,6 +3,30 @@
     color: #68D9A4;
 }
 
+#ingredients>button:hover {
+    background-color: #0751bc;
+}
+
+#ingredientTag>i:hover {
+    color: #0751bc;
+}
+
+#appareil>button:hover {
+    background-color: #2caf72;
+}
+
+#appareilTag>i:hover {
+    color: #2caf72;
+}
+
+#ustensiles>button:hover {
+    background-color: #dd2c17;
+}
+
+#ustensileTag>i:hover {
+    color: #dd2c17;
+}
+
 #closeIngredientsFilter,
 #closeAppareilFilter,
 #closeUstensilesFilter {
@@ -105,7 +129,7 @@
 #tagsBadges {
     display: flex;
     justify-content: flex-start;
-    margin-left: 2rem;
+    margin-left: 2.5rem;
 }
 
 #tagsBadges>#appareilTag,
