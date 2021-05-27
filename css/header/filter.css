@@ -75,9 +75,9 @@
     width: 9rem;
 }
 
-#ingredientsExample>li.list-ingredients.activated,
-#appareilExample>li.list-appareil.activated,
-#ustensilesExample>li.list-ustensiles.activated {
+#ingredientsExample>li.list-ingredients.selected,
+#appareilExample>li.list-appareil.selected,
+#ustensilesExample>li.list-ustensiles.selected {
     background-color: #000;
 }
 
@@ -108,21 +108,21 @@
     margin-left: 2rem;
 }
 
-#tagsBadges>#appareilBadges,
+#tagsBadges>#appareilTag,
 #hiddenAppareilFilter,
 #appareil>button,
 #inputAppareil {
     background-color: #68D9A4;
 }
 
-#tagsBadges>#ingredientBadges,
+#tagsBadges>#ingredientTag,
 #hiddenIngredientsFilter,
 #ingredients>button,
 #inputIngredients {
     background-color: #3282F7;
 }
 
-#tagsBadges>#ustensileBadges,
+#tagsBadges>#ustensileTag,
 #hiddenUstensilesFilter,
 #ustensiles>button,
 #inputUstensiles {
@@ -141,9 +141,9 @@
     width: fit-content;
 }
 
-#ingredientBadges>i,
-#appareilBadges>i,
-#ustensileBadges>i {
+#ingredientTag>i,
+#appareilTag>i,
+#ustensileTag>i {
     margin-left: 0.5rem;
 }
 

@@ -1,27 +1,27 @@
 'use strict';
 
+import Buttons from '../page/Buttons.js';
+import Messages from '../page/Messages.js';
+import Search from '../search/Search.js';
+import Tags from '../page/Tags.js';
 import Utils from '../utilities/Utils.js';
-import Search from './Search.js';
-import RecipesBuilder from '../pages/RecipesBuilder.js';
-import Badges from '../pages/Badges.js';
-import Message from '../pages/Messages.js';
 
 export default class Appliances {
     static appliancesExample = document.getElementById('appareilExample');
 
     static init(appliances) {
-        Utils.launcherInput(document.querySelector("#appareil > button"),
+        Utils.clearFilters(this.appliancesExample);
+        Buttons.launchButtons(document.querySelector("#appareil > button"),
             document.querySelector("#openAppareilFilter"),
             document.querySelector("#closeAppareilFilter"),
             document.querySelector("#hiddenAppareilFilter"));
-        Utils.clearFilters(this.appliancesExample);
-        this.displayAppliances(Utils.sortByTitle(appliances));
+        this.fillAppliances(Utils.sortByTitle(appliances));
         this.searchInput(appliances);
         return this;
     }
 
     // display the appliances in the appliances zone according to the recipes displayed in the 'recipes' section
-    static displayAppliances(appliances) {
+    static fillAppliances(appliances) {
         appliances.forEach((appliances) => {
             let listAppliances = document.createElement('li');
 
@@ -38,33 +38,37 @@ export default class Appliances {
             let valueSearch = key.target.value;
             if (Utils.isValid(valueSearch)) {
                 Utils.clearFilters(this.appliancesExample);
-                this.displayAppliances(Search.searchInputFilters(appliances, valueSearch));
+                this.fillAppliances(Search.searchInputFilters(appliances, valueSearch));
                 return;
-            }
+            };
             Utils.clearFilters(this.appliancesExample);
-            this.displayAppliances(Utils.sortByTitle(appliances));
+            this.fillAppliances(Utils.sortByTitle(appliances));
         });
     }
 
     // gives the activated class to the selected tag and searches if it is present in the recipes
-    static filterByTags() {
-        this.appliancesExample.addEventListener('click', event => {
-            let classValue = event.target.classList.value;
-            let appareilBadges = document.getElementById('appareilBadges');
+    static filterByTags(recipes) {
+        let appareilTag = document.getElementById('appareilTag');
 
+        document.querySelectorAll('.list-appareil').forEach(filter => {
+            filter.addEventListener('click', (event) => {
+                let classValue = event.target.classList.value;
 
-            if (-1 === classValue.indexOf('activated')) {
-                event.target.classList.add('activated');
-                this.searchAndDisplayRecipesFiltered();
-                Badges.buildTags(appareilBadges, Utils.upperText(event.target.getAttribute('data-filter')));
-                Message.removeResultMessage();
-                return;
-            }
-            event.target.classList.remove('activated');
-            Utils.clearRecipesSection();
-            Badges.removeTag(appareilBadges);
-            RecipesBuilder.buildSection(recipesApiResult);
-            return;
+                if (-1 === classValue.indexOf('selected')) {
+                    event.target.classList.add('selected');
+                    Buttons.hideButtonsOnClick(document.querySelector("#appareil > button"),
+                        document.querySelector("#openAppareilFilter"),
+                        document.querySelector("#hiddenAppareilFilter"))
+                    Tags
+                        .buildTags(appareilTag, Utils.upperText(event.target.getAttribute('data-filter')))
+                        .removeTagsOnClick(document.querySelector("#appareilTag > i"), event, appareilTag, recipes);
+                    Messages.hideMessage();
+                    this.searchAndDisplayRecipesFiltered();
+                    return;
+                } else {
+                    Tags.resetSection(event, appareilTag, recipes);
+                };
+            });
         });
         return this;
     }
@@ -72,6 +76,7 @@ export default class Appliances {
     static searchAndDisplayRecipesFiltered() {
         let resultFilters = Search.searchByTags();
 
+        Messages.buildResultMessageWithResult(resultFilters.show);
         Utils.showRecipesFiltered(resultFilters.show);
         Utils.hideRecipesFiltered(resultFilters.hide);
     }

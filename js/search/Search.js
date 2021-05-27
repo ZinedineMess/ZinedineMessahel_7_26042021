@@ -1,81 +1,37 @@
 'use strict';
 
-import Utils from '../utilities/Utils.js';
 import DataLogic from '../utilities/DataLogic.js';
+import Utils from '../utilities/Utils.js';
 
 export default class Search {
-    static recipesMatched = []; // result recipes that match
-    static recipesMatchedSorted = []; // array containing the result, having removed duplicate recipes
+    static recipesMatched = [];
 
-    // allows you to search for recipes by name, description and ingredients
-    static search(value) {
-        this.searchPrincipal(value);
-        this.removeDuplicatesRecipes();
+    static searchMainInput(value) {
+        this.recipesMatched = [];
 
+        recipesApiResult.forEach(recipe => {
+            if (Utils.normalizeText(recipe.name).includes(Utils.normalizeText(value)) || Utils.normalizeText(recipe.description).includes(Utils.normalizeText(value)) || recipe.ingredients.some(elt => Utils.normalizeText(elt.ingredient).includes(value))) {
+                this.recipesMatched.push(recipe);
+            };
+        });
         return {
-            'recipesMatchedSorted': this.recipesMatchedSorted,
-            'ingredients': DataLogic.getAllIngredients(this.recipesMatchedSorted),
-            'appliances': DataLogic.getAllAppliances(this.recipesMatchedSorted),
-            'ustensils': DataLogic.getAllUstensils(this.recipesMatchedSorted),
+            'recipesMatched': this.recipesMatched,
+            'ingredients': DataLogic.getAllIngredients(this.recipesMatched),
+            'appliances': DataLogic.getAllAppliances(this.recipesMatched),
+            'ustensils': DataLogic.getAllUstensils(this.recipesMatched),
         };
-    }
-
-    // search by input for name/description/ingredients
-    static searchPrincipal(value) {
-        this.recipesMatched = []; // refresh recipesMatched
-        this.searchByName(value) &&
-            this.searchByDescription(value) &&
-            this.searchByIngredients(value);
-    }
-
-    static searchByName(value) {
-        recipesApiResult.forEach(recipe => {
-            if (Utils.normalizeText(recipe.name).includes(Utils.normalizeText(value))) {
-                this.recipesMatched = [];
-                this.recipesMatched.push(recipe);
-            }
-        });
-
-        return this.recipesMatched;
-    }
-
-    static searchByDescription(value) {
-        recipesApiResult.forEach(recipe => {
-            if (Utils.normalizeText(recipe.description).includes(Utils.normalizeText(value))) {
-                this.recipesMatched.push(recipe);
-            }
-        });
-
-        return this.recipesMatched;
-    }
-
-    static searchByIngredients(value) {
-        recipesApiResult.forEach(recipe => {
-            if (recipe.ingredients.some(elt => Utils.normalizeText(elt.ingredient).includes(value))) {
-                this.recipesMatched.push(recipe);
-            }
-        });
-
-        return this.recipesMatched;
-    }
-
-    // removed duplicate recipes
-    static removeDuplicatesRecipes() {
-        this.recipesMatchedSorted = [...new Set(this.recipesMatched)];
-
-        return this.recipesMatchedSorted;
     }
 
     // search by input for ingredients/appliances/ustensils
     static searchInputFilters(collection, value) {
-        let matched = [];
+        let resultInput = [];
         collection.forEach(elt => {
             if (Utils.normalizeText(elt).includes(Utils.normalizeText(value))) {
-                matched.push(elt);
-            }
+                resultInput.push(elt);
+            };
         });
 
-        return matched;
+        return resultInput;
     }
 
     // search if the selected tag is in the recipes found in the recipe section
@@ -96,5 +52,17 @@ export default class Search {
             'show': matched,
             'hide': notMatched
         };
+    }
+
+    static showRecipesFiltered(elt) {
+        return elt.forEach(e => {
+            e.style.display = 'block';
+        });
+    }
+
+    static hideRecipesFiltered(elt) {
+        return elt.forEach(e => {
+            e.style.display = 'none';
+        });
     }
 }

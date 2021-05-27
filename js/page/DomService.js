@@ -2,9 +2,9 @@
 
 import Utils from '../utilities/Utils.js';
 
-export default class Builder {
+export default class DomService {
     // build the section containing the recipes to display
-    static buildSection(collections) {
+    static buildResult(collections) {
         return collections.forEach(collection => {
             this.buildRecipe(collection);
         });

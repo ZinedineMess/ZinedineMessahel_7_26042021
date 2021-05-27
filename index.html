@@ -21,7 +21,7 @@
             alt="Les petits plats" />
 
         <!-- SEARCH BAR-->
-        <form action='' method='get' id='searchBar'>
+        <form id='searchBar'>
             <label for="siteSearch"></label>
             <input type="search" id="searchBarInput"
                 placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette"
@@ -31,9 +31,9 @@
 
         <!-- Badges added dynamically: -->
         <nav id="tagsBadges">
-            <span id="ingredientBadges"></span>
-            <span id="appareilBadges"></span>
-            <span id="ustensileBadges"></span>
+            <span id="ingredientTag"></span>
+            <span id="appareilTag"></span>
+            <span id="ustensileTag"></span>
         </nav>
 
         <!-- FILTER -->
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Dynamic search result message: -->
         <aside id="resultMessage">
             <span>Aucun résultat</span>

@@ -1,18 +1,9 @@
 'use strict';
 
 export default class Utils {
-    // Collect all the ingredients/appliance/ustensils, and sort them alphabetically
-    static sortByTitle(array) {
-        let arrayNoSort = [...new Set(array)];
-        let arraySort = arrayNoSort.sort((a, b) => {
-            if (a.toLowerCase() < b.toLowerCase()) {
-                return -1;
-            } else if (a.toLowerCase() > b.toLowerCase()) {
-                return 1;
-            }
-        })
-
-        return arraySort;
+    // search starts from 3 characters
+    static isValid(value) {
+        return value.length > 2;
     }
 
     // transform the text into lowercase
@@ -37,30 +28,6 @@ export default class Utils {
             .replace(/[\u0300-\u036f]/g, "");
     }
 
-    // search starts from 3 characters
-    static isValid(value) {
-        return value.length > 2;
-    }
-
-    // Open/Close the ingredients/appliance/ustensils menu
-    static launcherInput(btn, open, close, hiddenPart) {
-        // open
-        btn.addEventListener('click', () => {
-            btn.style.width = "35rem";
-            open.style.display = 'none';
-            hiddenPart.style.display = 'block';
-        });
-
-        // close
-        close.addEventListener('click', () => {
-            btn.style.width = "11rem";
-            open.style.display = 'block';
-            hiddenPart.style.display = 'none';
-        });
-
-        return this;
-    }
-
     static clearRecipesSection() {
         return document.getElementById('mainContent').innerHTML = '';
     }
@@ -69,9 +36,23 @@ export default class Utils {
         return elt.innerHTML = '';
     }
 
+    // Collect all the ingredients/appliance/ustensils, and sort them alphabetically
+    static sortByTitle(array) {
+        let arrayNoSort = [...new Set(array)];
+        let arraySort = arrayNoSort.sort((a, b) => {
+            if (a.toLowerCase() < b.toLowerCase()) {
+                return -1;
+            } else if (a.toLowerCase() > b.toLowerCase()) {
+                return 1;
+            }
+        })
+
+        return arraySort;
+    }
+
     // get the elements holding the 'activated' class
     static getFiltersWithClassActivated() {
-        let currentFilters = document.querySelectorAll('li.activated');
+        let currentFilters = document.querySelectorAll('li.selected');
         let filterSelected = [];
 
         currentFilters.forEach(function (currentFilter) {

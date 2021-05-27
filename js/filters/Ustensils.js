@@ -1,27 +1,27 @@
 'use strict';
 
+import Buttons from '../page/Buttons.js';
+import Messages from '../page/Messages.js';
+import Search from '../search/Search.js';
+import Tags from '../page/Tags.js';
 import Utils from '../utilities/Utils.js';
-import Search from './Search.js';
-import RecipesBuilder from '../pages/RecipesBuilder.js';
-import Badges from '../pages/Badges.js';
-import Message from '../pages/Messages.js';
 
 export default class Ustensils {
     static ustensilsExample = document.getElementById('ustensilesExample');
 
     static init(ustensils) {
-        Utils.launcherInput(document.querySelector("#ustensiles > button"),
+        Utils.clearFilters(this.ustensilsExample);
+        Buttons.launchButtons(document.querySelector("#ustensiles > button"),
             document.querySelector("#openUstensilesFilter"),
             document.querySelector("#closeUstensilesFilter"),
             document.querySelector("#hiddenUstensilesFilter"));
-        Utils.clearFilters(this.ustensilsExample);
-        this.displayUstensils(Utils.sortByTitle(ustensils));
+        this.fillUstensils(Utils.sortByTitle(ustensils));
         this.searchInput(ustensils);
         return this;
     }
 
     // display the ustensils in the ustensils zone according to the recipes displayed in the 'recipes' section
-    static displayUstensils(ustensils) {
+    static fillUstensils(ustensils) {
         ustensils.forEach((ustensils) => {
             let listUstensils = document.createElement('li');
 
@@ -38,32 +38,37 @@ export default class Ustensils {
             let valueSearch = key.target.value;
             if (Utils.isValid(valueSearch)) {
                 Utils.clearFilters(this.ustensilsExample);
-                this.displayUstensils(Search.searchInputFilters(ustensils, valueSearch));
+                this.fillUstensils(Search.searchInputFilters(ustensils, valueSearch));
                 return;
             }
             Utils.clearFilters(this.ustensilsExample);
-            this.displayUstensils(Utils.sortByTitle(ustensils));
+            this.fillUstensils(Utils.sortByTitle(ustensils));
         });
     }
 
     // gives the activated class to the selected tag and searches if it is present in the recipes
-    static filterByTags() {
-        this.ustensilsExample.addEventListener('click', event => {
-            let classValue = event.target.classList.value;
-            let ustensileBadges = document.getElementById('ustensileBadges');
+    static filterByTags(recipes) {
+        let ustensileTag = document.getElementById('ustensileTag');
 
-            if (-1 === classValue.indexOf('activated')) {
-                event.target.classList.add('activated');
-                this.searchAndDisplayRecipesFiltered();
-                Badges.buildTags(ustensileBadges, Utils.upperText(event.target.getAttribute('data-filter')));
-                Message.removeResultMessage();
-                return;
-            }
-            event.target.classList.remove('activated');
-            Utils.clearRecipesSection();
-            Badges.removeTag(ustensileBadges);
-            RecipesBuilder.buildSection(recipesApiResult);
-            return;
+        document.querySelectorAll('.list-ustensiles').forEach(filter => {
+            filter.addEventListener('click', (event) => {
+                let classValue = event.target.classList.value;
+
+                if (-1 === classValue.indexOf('selected')) {
+                    event.target.classList.add('selected');
+                    Buttons.hideButtonsOnClick(document.querySelector("#ustensiles > button"),
+                        document.querySelector("#openUstensilesFilter"),
+                        document.querySelector("#hiddenUstensilesFilter"))
+                    Tags
+                        .buildTags(ustensileTag, Utils.upperText(event.target.getAttribute('data-filter')))
+                        .removeTagsOnClick(document.querySelector("#ustensileTag > i"), event, ustensileTag, recipes);
+                    Messages.hideMessage();
+                    this.searchAndDisplayRecipesFiltered();
+                    return;
+                } else {
+                    Tags.resetSection(event, ustensileTag, recipes);
+                };
+            });
         });
         return this;
     }
@@ -71,6 +76,7 @@ export default class Ustensils {
     static searchAndDisplayRecipesFiltered() {
         let resultFilters = Search.searchByTags();
 
+        Messages.buildResultMessageWithResult(resultFilters.show);
         Utils.showRecipesFiltered(resultFilters.show);
         Utils.hideRecipesFiltered(resultFilters.hide);
     }
