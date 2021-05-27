@@ -9,6 +9,7 @@ export default class Messages {
         this.displayMessage();
         this.resultMessage.style.backgroundColor = '#c4dcff'
         this.resultSpan.innerHTML = recipes.length + ' recette(s) correspond(ent) à votre recherche';
+        this.hideMessageOnClick();
         return this;
     }
 
@@ -28,5 +29,11 @@ export default class Messages {
     // disappear the message containing the number of recipes
     static hideMessage() {
         return this.resultMessage.style.display = 'none';
+    }
+
+    static hideMessageOnClick() {
+        document.querySelector("#resultMessage > i").addEventListener('click', () => {
+            return this.hideMessage();
+        })
     }
 }
