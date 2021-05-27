@@ -1,0 +1,165 @@
+#appareilExample>li:hover {
+    background-color: #ffff;
+    color: #68D9A4;
+}
+
+#closeIngredientsFilter,
+#closeAppareilFilter,
+#closeUstensilesFilter {
+    font-size: 1.125rem;
+    left: 32rem;
+    position: absolute;
+    top: 1.8rem;
+}
+
+#filter {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 1rem auto;
+    padding: 0;
+    width: 95%;
+}
+
+#hiddenIngredientsFilter,
+#hiddenAppareilFilter,
+#hiddenUstensilesFilter {
+    border-radius: 5px;
+    color: #ffff;
+    display: none;
+    position: absolute;
+    top: 16.2rem;
+    width: 35rem;
+    z-index: 10;
+}
+
+#ingredients>button,
+#appareil>button,
+#ustensiles>button {
+    align-items: center;
+    border: none;
+    border-radius: .3125rem;
+    color: #ffff;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.125rem;
+    height: 4.3125rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    transition: linear .3s;
+    width: 11rem;
+}
+
+#ingredientsExample,
+#appareilExample,
+#ustensilesExample {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: space-evenly;
+    list-style: none;
+    padding: .5rem;
+}
+
+#ingredientsExample>li,
+#appareilExample>li,
+#ustensilesExample>li {
+    font-size: 1.21rem;
+    overflow: hidden;
+    padding: .5rem 1rem;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 9rem;
+}
+
+#ingredientsExample>li.list-ingredients.selected,
+#appareilExample>li.list-appareil.selected,
+#ustensilesExample>li.list-ustensiles.selected {
+    background-color: #000;
+}
+
+#ingredientsExample>li:hover {
+    background-color: #ffff;
+    color: #3282F7;
+}
+
+#inputIngredients,
+#inputAppareil,
+#inputUstensiles {
+    border: none;
+    border-radius: 5px;
+    color: #ffff;
+    font-family: Lato;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    height: 4.3125rem;
+    outline: none;
+    padding: 2rem;
+    width: 100%;
+}
+
+#tagsBadges {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 2rem;
+}
+
+#tagsBadges>#appareilTag,
+#hiddenAppareilFilter,
+#appareil>button,
+#inputAppareil {
+    background-color: #68D9A4;
+}
+
+#tagsBadges>#ingredientTag,
+#hiddenIngredientsFilter,
+#ingredients>button,
+#inputIngredients {
+    background-color: #3282F7;
+}
+
+#tagsBadges>#ustensileTag,
+#hiddenUstensilesFilter,
+#ustensiles>button,
+#inputUstensiles {
+    background-color: #ED6454;
+}
+
+#tagsBadges>span {
+    align-items: center;
+    border-radius: .25rem;
+    color: #fff;
+    cursor: default;
+    display: none;
+    justify-content: space-between;
+    margin: 0.5rem 1rem .25rem 0;
+    padding: .5rem 1rem;
+    width: fit-content;
+}
+
+#ingredientTag>i,
+#appareilTag>i,
+#ustensileTag>i {
+    margin-left: 0.5rem;
+}
+
+#ustensilesExample>li:hover {
+    background-color: #ffff;
+    color: #ED6454;
+}
+
+@media screen and (min-width: 900px) {
+    #filter {
+        flex-direction: row;
+    }
+
+    #ingredients>button,
+    #appareil>button,
+    #ustensiles>button {
+        margin-right: 2rem;
+    }
+}
