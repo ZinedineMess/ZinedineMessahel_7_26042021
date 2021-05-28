@@ -36,13 +36,11 @@ export default class Appliances {
     static searchInput(appliances) {
         document.getElementById('inputAppareil').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
-            if (Utils.isValid(valueSearch)) {
-                Utils.clearFilters(this.appliancesExample);
-                this.fillAppliances(Search.searchInputFilters(appliances, valueSearch));
-                return;
-            };
             Utils.clearFilters(this.appliancesExample);
-            this.fillAppliances(Utils.sortByTitle(appliances));
+            this.fillAppliances(
+                Utils.isValid(valueSearch) ?
+                Search.searchInputFilters(appliances, valueSearch) :
+                Utils.sortByTitle(appliances));
         });
     }
 
@@ -50,25 +48,23 @@ export default class Appliances {
     static filterByTags(recipes) {
         let appareilTag = document.getElementById('appareilTag');
 
-        document.querySelectorAll('.list-appareil').forEach(filter => {
-            filter.addEventListener('click', (event) => {
-                let classValue = event.target.classList.value;
+        document.querySelector('#appareilExample').addEventListener('click', (event) => {
+            let classValue = event.target.classList.value;
 
-                if (-1 === classValue.indexOf('selected')) {
-                    event.target.classList.add('selected');
-                    Buttons.hideButtonsOnClick(document.querySelector("#appareil > button"),
-                        document.querySelector("#openAppareilFilter"),
-                        document.querySelector("#hiddenAppareilFilter"))
-                    Tags
-                        .buildTags(appareilTag, Utils.upperText(event.target.getAttribute('data-filter')))
-                        .removeTagsOnClick(document.querySelector("#appareilTag > i"), event, appareilTag, recipes);
-                    Messages.hideMessage();
-                    this.searchAndDisplayRecipesFiltered();
-                    return;
-                } else {
-                    Tags.resetSection(event, appareilTag, recipes);
-                };
-            });
+            if (-1 === classValue.indexOf('selected')) {
+                event.target.classList.add('selected');
+                Buttons.hideButtonsOnClick(document.querySelector("#appareil > button"),
+                    document.querySelector("#openAppareilFilter"),
+                    document.querySelector("#hiddenAppareilFilter"))
+                Tags
+                    .buildTags(appareilTag, Utils.upperText(event.target.getAttribute('data-filter')))
+                    .removeTagsOnClick(document.querySelector("#appareilTag > i"), event, appareilTag, recipes);
+                Messages.hideMessage();
+                this.searchAndDisplayRecipesFiltered();
+                return;
+            } else {
+                Tags.resetSection(event, appareilTag, recipes);
+            };
         });
         return this;
     }

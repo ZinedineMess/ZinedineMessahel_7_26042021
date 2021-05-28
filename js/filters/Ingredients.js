@@ -37,12 +37,11 @@ export default class Ingredients {
     static searchInput(ingredients) {
         document.getElementById('inputIngredients').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
-            if (Utils.isValid(valueSearch)) {
-                Utils.clearFilters(this.ingredientsExample);
-                return this.fillIngredients(Search.searchInputFilters(ingredients, valueSearch));
-            }
             Utils.clearFilters(this.ingredientsExample);
-            return this.fillIngredients(Utils.sortByTitle(ingredients));
+            this.fillIngredients(
+                Utils.isValid(valueSearch) ?
+                Search.searchInputFilters(ingredients, valueSearch) :
+                Utils.sortByTitle(ingredients));
         });
     }
 
@@ -50,24 +49,22 @@ export default class Ingredients {
     static filterByTags(recipes) {
         let ingredientTag = document.getElementById('ingredientTag');
 
-        document.querySelectorAll('.list-ingredients').forEach(filter => {
-            filter.addEventListener('click', (event) => {
-                let classValue = event.target.classList.value;
+        document.querySelector('#ingredientsExample').addEventListener('click', (event) => {
+            let classValue = event.target.classList.value;
 
-                if (-1 === classValue.indexOf('selected')) {
-                    event.target.classList.add('selected');
-                    Buttons.hideButtonsOnClick(document.querySelector("#ingredients > button"),
-                        document.querySelector("#openIngredientsFilter"),
-                        document.querySelector("#hiddenIngredientsFilter"))
-                    Tags
-                        .buildTags(ingredientTag, Utils.upperText(event.target.getAttribute('data-filter')))
-                        .removeTagsOnClick(document.querySelector("#ingredientTag > i"), event, ingredientTag, recipes);
-                    this.searchAndDisplayRecipesFiltered();
-                    return;
-                } else {
-                    Tags.resetSection(event, ingredientTag, recipes);
-                };
-            });
+            if (-1 === classValue.indexOf('selected')) {
+                event.target.classList.add('selected');
+                Buttons.hideButtonsOnClick(document.querySelector("#ingredients > button"),
+                    document.querySelector("#openIngredientsFilter"),
+                    document.querySelector("#hiddenIngredientsFilter"))
+                Tags
+                    .buildTags(ingredientTag, Utils.upperText(event.target.getAttribute('data-filter')))
+                    .removeTagsOnClick(document.querySelector("#ingredientTag > i"), event, ingredientTag, recipes);
+                this.searchAndDisplayRecipesFiltered();
+                return;
+            } else {
+                Tags.resetSection(event, ingredientTag, recipes);
+            };
         });
         return this;
     }
