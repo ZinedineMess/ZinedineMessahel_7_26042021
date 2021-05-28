@@ -1,6 +1,7 @@
 'use strict';
 
 import Buttons from '../page/Buttons.js';
+import DataLogic from '../utilities/DataLogic.js';
 import DomService from '../page/DomService.js';
 import Messages from '../page/Messages.js';
 import Search from '../search/Search.js';
@@ -37,13 +38,11 @@ export default class Ustensils {
     static searchInput(ustensils) {
         document.getElementById('inputUstensiles').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
-            if (Utils.isValid(valueSearch)) {
-                Utils.clearFilters(this.ustensilsExample);
-                this.fillUstensils(Search.searchInputFilters(ustensils, valueSearch));
-                return;
-            }
             Utils.clearFilters(this.ustensilsExample);
-            this.fillUstensils(Utils.sortByTitle(ustensils));
+            this.fillUstensils(
+                Utils.isValid(valueSearch) ?
+                Search.searchInputFilters(ustensils, valueSearch) :
+                Utils.sortByTitle(ustensils));
         });
     }
 
@@ -51,27 +50,27 @@ export default class Ustensils {
         let selected = [];
         let ustensileTag = document.getElementById('ustensileTag');
 
-        document.querySelectorAll('.list-ustensiles').forEach(filter => {
-            filter.addEventListener('click', (event) => {
-                let classValue = event.target.classList.value;
+        document.querySelector('#ustensilesExample').addEventListener('click', (event) => {
+            let classValue = event.target.classList.value;
 
-                if (-1 === classValue.indexOf('selected')) {
-                    event.target.classList.add('selected');
-                    selected.push(event.target.getAttribute('data-filter'));
-                    Buttons.hideButtonsOnClick(document.querySelector("#ustensiles > button"),
-                        document.querySelector("#openUstensilesFilter"),
-                        document.querySelector("#hiddenUstensilesFilter"))
-                    Tags
-                        .buildTags(ustensileTag, Utils.upperText(event.target.getAttribute('data-filter')))
-                        .removeTagsOnClick(document.querySelector("#ustensileTag > i"), event, ustensileTag, recipes);
-                    Messages.buildResultMessageWithResult(Search.searchByUstTags(recipes, selected));
-                    Utils.clearRecipesSection();
-                    DomService.buildResult(Search.searchByUstTags(recipes, selected));
-                } else {
-                    selected.splice(event.target.getAttribute('data-filter'));
-                    Tags.resetSection(event, ustensileTag, recipes);
-                };
-            });
+            if (-1 === classValue.indexOf('selected')) {
+                event.target.classList.add('selected');
+                selected.push(event.target.getAttribute('data-filter'));
+                Buttons.hideButtonsOnClick(document.querySelector("#ustensiles > button"),
+                    document.querySelector("#openUstensilesFilter"),
+                    document.querySelector("#hiddenUstensilesFilter"))
+                Tags
+                    .buildTags(ustensileTag, Utils.upperText(event.target.getAttribute('data-filter')))
+                    .removeTagsOnClick(document.querySelector("#ustensileTag > i"), event, ustensileTag, recipes);
+                Messages.buildResultMessageWithResult(Search.searchByUstTags(recipes, selected));
+                Utils.clearRecipesSection();
+                DomService.buildResult(Search.searchByUstTags(recipes, selected));
+                Utils.clearFilters(this.ustensilsExample);
+                this.fillUstensils(Utils.sortByTitle(DataLogic.getAllUstensils(Search.searchByUstTags(recipes, selected))));
+            } else {
+                selected.splice(event.target.getAttribute('data-filter'));
+                Tags.resetSection(event, ustensileTag, recipes);
+            };
         });
         return selected;
     }

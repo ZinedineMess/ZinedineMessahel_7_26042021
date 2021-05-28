@@ -1,6 +1,7 @@
 'use strict';
 
 import Buttons from '../page/Buttons.js';
+import DataLogic from '../utilities/DataLogic.js';
 import DomService from '../page/DomService.js';
 import Messages from '../page/Messages.js';
 import Search from '../search/Search.js';
@@ -37,13 +38,11 @@ export default class Appliances {
     static searchInput(appliances) {
         document.getElementById('inputAppareil').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
-            if (Utils.isValid(valueSearch)) {
-                Utils.clearFilters(this.appliancesExample);
-                this.fillAppliances(Search.searchInputFilters(appliances, valueSearch));
-                return;
-            };
             Utils.clearFilters(this.appliancesExample);
-            this.fillAppliances(Utils.sortByTitle(appliances));
+            this.fillAppliances(
+                Utils.isValid(valueSearch) ?
+                Search.searchInputFilters(appliances, valueSearch) :
+                Utils.sortByTitle(appliances));
         });
     }
 
@@ -51,27 +50,27 @@ export default class Appliances {
         let selected = [];
         let appareilTag = document.getElementById('appareilTag');
 
-        document.querySelectorAll('.list-appareil').forEach(filter => {
-            filter.addEventListener('click', (event) => {
-                let classValue = event.target.classList.value;
+        document.querySelector('#appareilExample').addEventListener('click', (event) => {
+            let classValue = event.target.classList.value;
 
-                if (-1 === classValue.indexOf('selected')) {
-                    event.target.classList.add('selected');
-                    selected.push(event.target.getAttribute('data-filter'));
-                    Buttons.hideButtonsOnClick(document.querySelector("#appareil > button"),
-                        document.querySelector("#openAppareilFilter"),
-                        document.querySelector("#hiddenAppareilFilter"))
-                    Tags
-                        .buildTags(appareilTag, Utils.upperText(event.target.getAttribute('data-filter')))
-                        .removeTagsOnClick(document.querySelector("#appareilTag > i"), event, appareilTag, recipes);
-                    Messages.buildResultMessageWithResult(Search.searchByAppTags(recipes, selected));
-                    Utils.clearRecipesSection();
-                    DomService.buildResult(Search.searchByAppTags(recipes, selected));
-                } else {
-                    selected.splice(event.target.getAttribute('data-filter'));
-                    Tags.resetSection(event, appareilTag, recipes);
-                };
-            });
+            if (-1 === classValue.indexOf('selected')) {
+                event.target.classList.add('selected');
+                selected.push(event.target.getAttribute('data-filter'));
+                Buttons.hideButtonsOnClick(document.querySelector("#appareil > button"),
+                    document.querySelector("#openAppareilFilter"),
+                    document.querySelector("#hiddenAppareilFilter"))
+                Tags
+                    .buildTags(appareilTag, Utils.upperText(event.target.getAttribute('data-filter')))
+                    .removeTagsOnClick(document.querySelector("#appareilTag > i"), event, appareilTag, recipes);
+                Messages.buildResultMessageWithResult(Search.searchByAppTags(recipes, selected));
+                Utils.clearRecipesSection();
+                DomService.buildResult(Search.searchByAppTags(recipes, selected));
+                Utils.clearFilters(this.appliancesExample);
+                this.fillAppliances(Utils.sortByTitle(DataLogic.getAllAppliances(Search.searchByAppTags(recipes, selected))));
+            } else {
+                selected.splice(event.target.getAttribute('data-filter'));
+                Tags.resetSection(event, appareilTag, recipes);
+            };
         });
         return selected;
     }

@@ -6,6 +6,7 @@ import Messages from '../page/Messages.js';
 import Search from '../search/Search.js';
 import Tags from '../page/Tags.js';
 import Utils from '../utilities/Utils.js';
+import DataLogic from '../utilities/DataLogic.js';
 
 export default class Ingredients {
     static ingredientsExample = document.getElementById('ingredientsExample');
@@ -36,12 +37,11 @@ export default class Ingredients {
     static searchInput(ingredients) {
         document.getElementById('inputIngredients').addEventListener('keyup', (key) => {
             let valueSearch = key.target.value;
-            if (Utils.isValid(valueSearch)) {
-                Utils.clearFilters(this.ingredientsExample);
-                return this.fillIngredients(Search.searchInputFilters(ingredients, valueSearch));
-            }
             Utils.clearFilters(this.ingredientsExample);
-            return this.fillIngredients(Utils.sortByTitle(ingredients));
+            this.fillIngredients(
+                Utils.isValid(valueSearch) ?
+                Search.searchInputFilters(ingredients, valueSearch) :
+                Utils.sortByTitle(ingredients));
         });
     }
 
@@ -49,27 +49,27 @@ export default class Ingredients {
         let selected = [];
         let ingredientTag = document.getElementById('ingredientTag');
 
-        document.querySelectorAll('.list-ingredients').forEach(filter => {
-            filter.addEventListener('click', (event) => {
-                let classValue = event.target.classList.value;
+        document.querySelector('#ingredientsExample').addEventListener('click', (event) => {
+            let classValue = event.target.classList.value;
 
-                if (-1 === classValue.indexOf('selected')) {
-                    event.target.classList.add('selected');
-                    selected.push(event.target.getAttribute('data-filter'));
-                    Buttons.hideButtonsOnClick(document.querySelector("#ingredients > button"),
-                        document.querySelector("#openIngredientsFilter"),
-                        document.querySelector("#hiddenIngredientsFilter"))
-                    Tags
-                        .buildTags(ingredientTag, Utils.upperText(event.target.getAttribute('data-filter')))
-                        .removeTagsOnClick(document.querySelector("#ingredientTag > i"), event, ingredientTag, recipes);
-                    Messages.buildResultMessageWithResult(Search.searchByIngTags(recipes, selected));
-                    Utils.clearRecipesSection();
-                    DomService.buildResult(Search.searchByIngTags(recipes, selected));
-                } else {
-                    selected.splice(event.target.getAttribute('data-filter'));
-                    Tags.resetSection(event, ingredientTag, recipes);
-                };
-            });
+            if (-1 === classValue.indexOf('selected')) {
+                event.target.classList.add('selected');
+                selected.push(event.target.getAttribute('data-filter'));
+                Buttons.hideButtonsOnClick(document.querySelector("#ingredients > button"),
+                    document.querySelector("#openIngredientsFilter"),
+                    document.querySelector("#hiddenIngredientsFilter"))
+                Tags
+                    .buildTags(ingredientTag, Utils.upperText(event.target.getAttribute('data-filter')))
+                    .removeTagsOnClick(document.querySelector("#ingredientTag > i"), event, ingredientTag, recipes);
+                Messages.buildResultMessageWithResult(Search.searchByIngTags(recipes, selected));
+                Utils.clearRecipesSection();
+                DomService.buildResult(Search.searchByIngTags(recipes, selected));
+                Utils.clearFilters(this.ingredientsExample);
+                this.fillIngredients(Utils.sortByTitle(DataLogic.getAllIngredients(Search.searchByIngTags(recipes, selected))));
+            } else {
+                selected.splice(event.target.getAttribute('data-filter'));
+                Tags.resetSection(event, ingredientTag, recipes);
+            };
         });
         return selected;
     }
