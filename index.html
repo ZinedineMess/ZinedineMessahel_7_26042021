@@ -21,8 +21,8 @@
             alt="Les petits plats" />
 
         <!-- SEARCH BAR-->
-        <form action='' method='get' id='searchBar'>
-            <label for="siteSearch"></label>
+        <form id='searchBar'>
+            <label for="searchBarInput"></label>
             <input type="search" id="searchBarInput"
                 placeholder="Rechercher un ingrédient, appareil, ustensile ou une recette"
                 aria-label="Search through site content">
@@ -41,7 +41,7 @@
             <div id="ingredients">
                 <button>Ingrédients <i class="fas fa-chevron-down" id='openIngredientsFilter'></i></button>
                 <div id='hiddenIngredientsFilter'>
-                    <label for="ingredient-search"></label>
+                    <label for="inputIngredients"></label>
                     <input type="search" id="inputIngredients" aria-label="Search through ingredients"
                         placeholder="Rechercher un ingrédient">
                     <i class="fas fa-chevron-up" id="closeIngredientsFilter"></i>
@@ -52,7 +52,7 @@
             <div id="appareil">
                 <button>Appareil <i class="fas fa-chevron-down" id='openAppareilFilter'></i></button>
                 <div id='hiddenAppareilFilter'>
-                    <label for="appareil-search"></label>
+                    <label for="inputAppareil"></label>
                     <input type="search" id="inputAppareil" aria-label="Search through appareil"
                         placeholder="Rechercher un appareil">
                     <i class="fas fa-chevron-up" id="closeAppareilFilter"></i>
@@ -63,7 +63,7 @@
             <div id="ustensiles">
                 <button>Ustensiles <i class="fas fa-chevron-down" id='openUstensilesFilter'></i></button>
                 <div id='hiddenUstensilesFilter'>
-                    <label for="ustensilesSearch"></label>
+                    <label for="inputUstensiles"></label>
                     <input type="search" id="inputUstensiles" aria-label="Search through ustensiles"
                         placeholder="Rechercher un ustensile">
                     <i class="fas fa-chevron-up" id="closeUstensilesFilter"></i>
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- Dynamic search result message: -->
         <aside id="resultMessage">
             <span>Aucun résultat</span>

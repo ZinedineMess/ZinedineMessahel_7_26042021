@@ -11,7 +11,7 @@ import Utils from '../utilities/Utils.js';
 export default class Appliances {
     static appliancesExample = document.getElementById('appareilExample');
 
-    static init(appliances) {
+    static init(appliances, recipes) {
         Utils.clearFilters(this.appliancesExample);
         Buttons.launchButtons(document.querySelector("#appareil > button"),
             document.querySelector("#openAppareilFilter"),
@@ -19,16 +19,21 @@ export default class Appliances {
             document.querySelector("#hiddenAppareilFilter"));
         this.fillAppliances(Utils.sortByTitle(appliances));
         this.searchInput(appliances);
+        this.filterTags(recipes);
         return this;
     }
 
     // display the appliances in the appliances zone according to the recipes displayed in the 'recipes' section
     static fillAppliances(appliances) {
+        let ul = document.createElement('ul');
+        ul.classList.add('listUlApp');
+        this.appliancesExample.appendChild(ul);
+
         appliances.forEach((appliances) => {
             let listAppliances = document.createElement('li');
 
             listAppliances.innerHTML = `${Utils.upperText(appliances)}`
-            this.appliancesExample.appendChild(listAppliances);
+            ul.appendChild(listAppliances);
             listAppliances.classList.add('list-appareil');
             listAppliances.setAttribute('data-filter', `${appliances}`);
         });

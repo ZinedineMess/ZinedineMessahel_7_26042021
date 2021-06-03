@@ -3,6 +3,10 @@
 import DomService from './DomService.js';
 import Messages from './Messages.js';
 import Utils from '../utilities/Utils.js';
+import Ingredients from '../filters/Ingredients.js';
+import Appliances from '../filters/Appliances.js';
+import Ustensils from '../filters/Ustensils.js';
+import DataLogic from '../utilities/DataLogic.js';
 
 export default class Badges {
     static hiddenIngredientsFilter = document.querySelector('#hiddenIngredientsFilter');
@@ -55,9 +59,15 @@ export default class Badges {
 
     static resetSection(event, eltBadge, recipes) {
         event.target.classList.remove('selected');
-        Utils.clearRecipesSection();
         this.hideTag(eltBadge);
         Messages.buildResultMessageWithResult(recipes);
+        Utils.clearRecipesSection();
         DomService.buildResult(recipes);
+        Utils.clearFilters(document.getElementById('ingredientsExample'));
+        Ingredients.fillIngredients(DataLogic.getAllIngredients(recipes));
+        Utils.clearFilters(document.getElementById('appareilExample'));
+        Appliances.fillAppliances(DataLogic.getAllAppliances(recipes));
+        Utils.clearFilters(document.getElementById('ustensilesExample'));
+        Ustensils.fillUstensils(DataLogic.getAllUstensils(recipes));
     }
 }

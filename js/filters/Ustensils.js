@@ -11,7 +11,7 @@ import Utils from '../utilities/Utils.js';
 export default class Ustensils {
     static ustensilsExample = document.getElementById('ustensilesExample');
 
-    static init(ustensils) {
+    static init(ustensils, recipes) {
         Utils.clearFilters(this.ustensilsExample);
         Buttons.launchButtons(document.querySelector("#ustensiles > button"),
             document.querySelector("#openUstensilesFilter"),
@@ -19,16 +19,21 @@ export default class Ustensils {
             document.querySelector("#hiddenUstensilesFilter"));
         this.fillUstensils(Utils.sortByTitle(ustensils));
         this.searchInput(ustensils);
+        this.filterTags(recipes);
         return this;
     }
 
     // display the ustensils in the ustensils zone according to the recipes displayed in the 'recipes' section
     static fillUstensils(ustensils) {
+        let ul = document.createElement('ul');
+        ul.classList.add('listUlUst');
+        this.ustensilsExample.appendChild(ul);
+
         ustensils.forEach((ustensils) => {
             let listUstensils = document.createElement('li');
 
             listUstensils.innerHTML = `${Utils.upperText(ustensils)}`
-            this.ustensilsExample.appendChild(listUstensils);
+            ul.appendChild(listUstensils);
             listUstensils.classList.add('list-ustensiles');
             listUstensils.setAttribute('data-filter', `${ustensils}`);
         });

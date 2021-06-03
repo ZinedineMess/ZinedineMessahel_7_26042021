@@ -3,33 +3,32 @@
 @import url(./header/search-bar.css);
 @import url(./header/filter.css);
 @import url(./main/recipes.css);
-
 body {
-    padding: 0;
-    margin: 0 auto;
-    width: 90%;
+	padding: 0;
+	margin: 0 auto;
+	width: 90%;
 }
 
 header {
-    font-family: Lato, sans-serif;
-    text-align: center;
+	font-family: Lato, sans-serif;
+	text-align: center;
 }
 
 header img {
-    margin-top: 2.875rem;
-    width: 9.375rem;
+	margin-top: 2.875rem;
+	width: 9.375rem;
 }
 
 html {
-    box-sizing: border-box;
-    color: #353535;
-    font-family: Lato, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
+	box-sizing: border-box;
+	color: #353535;
+	font-family: Lato, 'Helvetica Neue', Arial, sans-serif;
+	font-size: 1rem;
+	font-weight: 400;
 }
 
 @media screen and (min-width: 900px) {
-    header img {
-        width: 16.75rem;
-    }
+	header img {
+		width: 16.75rem;
+	}
 }

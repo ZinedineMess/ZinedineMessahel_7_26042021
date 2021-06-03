@@ -11,7 +11,7 @@ import DataLogic from '../utilities/DataLogic.js';
 export default class Ingredients {
     static ingredientsExample = document.getElementById('ingredientsExample');
 
-    static init(ingredients) {
+    static init(ingredients, recipes) {
         Utils.clearFilters(this.ingredientsExample);
         Buttons.launchButtons(document.querySelector("#ingredients > button"),
             document.querySelector("#openIngredientsFilter"),
@@ -19,15 +19,20 @@ export default class Ingredients {
             document.querySelector("#hiddenIngredientsFilter"));
         this.fillIngredients(Utils.sortByTitle(ingredients));
         this.searchInput(ingredients);
+        this.filterTags(recipes);
     }
 
     // display the ingredients in the ingredients zone according to the recipes displayed in the 'recipes' section
     static fillIngredients(ingredients) {
+        let ul = document.createElement('ul');
+        ul.classList.add('listUlIng');
+        this.ingredientsExample.appendChild(ul);
+
         ingredients.forEach((ingredient) => {
             let listIngredients = document.createElement('li');
-
+            
+            ul.appendChild(listIngredients);
             listIngredients.innerHTML = `${Utils.upperText(ingredient)}`
-            this.ingredientsExample.appendChild(listIngredients);
             listIngredients.classList.add('list-ingredients');
             listIngredients.setAttribute('data-filter', `${ingredient}`);
         });
@@ -63,9 +68,10 @@ export default class Ingredients {
                     .removeTagsOnClick(document.querySelector("#ingredientTag > i"), event, ingredientTag, recipes);
                 Messages.buildResultMessageWithResult(Search.searchByIngTags(recipes, selected));
                 Utils.clearRecipesSection();
-                DomService.buildResult(Search.searchByIngTags(recipes, selected));
+                let result = Search.searchByIngTags(recipes, selected);
+                DomService.buildResult(result);
                 Utils.clearFilters(this.ingredientsExample);
-                this.fillIngredients(Utils.sortByTitle(DataLogic.getAllIngredients(Search.searchByIngTags(recipes, selected))));
+                this.fillIngredients(Utils.sortByTitle(DataLogic.getAllIngredients(result)));
             } else {
                 selected.splice(event.target.getAttribute('data-filter'));
                 Tags.resetSection(event, ingredientTag, recipes);

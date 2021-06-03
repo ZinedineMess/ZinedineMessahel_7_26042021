@@ -13,14 +13,11 @@ export default class Builder {
         DomService.buildResult(recipesApiResult);
         Messages.hideMessage();
         // Ingredients logic
-        Ingredients.init(DataLogic.getAllIngredients(recipesApiResult));
-        Ingredients.filterTags(recipesApiResult);
+        Ingredients.init(DataLogic.getAllIngredients(recipesApiResult), recipesApiResult);
         // Appliances logic
         Appliances.init(DataLogic.getAllAppliances(recipesApiResult), recipesApiResult);
-        Appliances.filterTags(recipesApiResult);
         // Ustensils logic
         Ustensils.init(DataLogic.getAllUstensils(recipesApiResult), recipesApiResult);
-        Ustensils.filterTags(recipesApiResult);
     }
 
     static initSearch(result) {
@@ -28,13 +25,10 @@ export default class Builder {
         DomService.buildResult(result.recipesMatched);
         Messages.buildResultMessageWithResult(result.recipesMatched);
         // Ingredients logic
-        Ingredients.init(result.ingredients);
-        Ingredients.filterTags(result.recipesMatched);
+        Ingredients.init(result.ingredients, result.recipesMatched);
         // Appliances logic
-        Appliances.init(result.appliances);
-        Appliances.filterTags(result.recipesMatched);
+        Appliances.init(result.appliances, result.recipesMatched);
         // Ustensils logic
-        Ustensils.init(result.ustensils);
-        Ustensils.filterTags(result.recipesMatched);
+        Ustensils.init(result.ustensils, result.recipesMatched);
     }
 }
