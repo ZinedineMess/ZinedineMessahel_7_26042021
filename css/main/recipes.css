@@ -1,70 +1,70 @@
 #mainContent {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin: 0;
 }
 
 #mainContent>article {
-    background-color: #E7E7E7;
-    border-radius: .3125rem;
-    height: auto;
-    margin-bottom: 2.5rem;
-    overflow: hidden;
-    position: relative;
-    text-overflow: ellipsis;
-    width: 22rem;
+	background-color: #E7E7E7;
+	border-radius: .3125rem;
+	height: auto;
+	margin-bottom: 2.5rem;
+	overflow: hidden;
+	position: relative;
+	text-overflow: ellipsis;
+	width: 22rem;
 }
 
 #mainContent>article>div.recipeInfo {
-    display: flex;
-    margin-left: 1rem;
-    margin-right: 1rem;
+	display: flex;
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
 
 #mainContent>article>div.recipeInfo>div.recipeIngredients>p {
-    font-size: .8rem;
-    margin: .125rem 0;
+	font-size: .8rem;
+	margin: .125rem 0;
 }
 
 #mainContent>article>div.recipeInfo>div.recipeIngredients,
 #mainContent>article>div.recipeInfo>div.recipeInstructions {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 7;
-    display: -webkit-box;
-    font-size: .8rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 50%;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 7;
+	display: -webkit-box;
+	font-size: .8rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 50%;
 }
 
 #mainContent>article>div.recipeTitle {
-    align-items: center;
-    background-color: #E7E7E7;
-    display: flex;
-    justify-content: space-between;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	align-items: center;
+	background-color: #E7E7E7;
+	display: flex;
+	justify-content: space-between;
+	margin-left: 1rem;
+	margin-right: 1rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 #mainContent>article>div.recipeTitle>h2,
 #mainContent>article>div.recipeTitle>span {
-    font-size: 1.2rem;
-    font-weight: 700;
+	font-size: 1.2rem;
+	font-weight: 700;
 }
 
 #mainContent>article>div.recipeTitle>span>i {
-    margin-right: .3rem;
+	margin-right: .3rem;
 }
 
 #mainContent>article>img {
-    height: 11.125rem;
-    width: 23.75rem;
+	height: 11.125rem;
+	width: 23.75rem;
 }
 
 #resultMessage>i:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }

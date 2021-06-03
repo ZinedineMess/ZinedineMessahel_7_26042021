@@ -1,4 +1,4 @@
-#appareilExample>li:hover {
+.listUlApp>li:hover {
     background-color: #ffff;
     color: #68D9A4;
 }
@@ -76,9 +76,9 @@
     width: 11rem;
 }
 
-#ingredientsExample,
-#appareilExample,
-#ustensilesExample {
+.listUlIng,
+.listUlApp,
+.listUlUst {
     display: flex;
     flex-wrap: wrap;
     height: fit-content;
@@ -87,9 +87,9 @@
     padding: .5rem;
 }
 
-#ingredientsExample>li,
-#appareilExample>li,
-#ustensilesExample>li {
+.listUlIng>li,
+.listUlApp>li,
+.listUlUst>li {
     font-size: 1.21rem;
     overflow: hidden;
     padding: .5rem 1rem;
@@ -99,13 +99,13 @@
     width: 9rem;
 }
 
-#ingredientsExample>li.list-ingredients.selected,
-#appareilExample>li.list-appareil.selected,
-#ustensilesExample>li.list-ustensiles.selected {
+.listUlIng>li.list-ingredients.selected,
+.listUlApp>li.list-appareil.selected,
+.listUlUst>li.list-ustensiles.selected {
     background-color: #000;
 }
 
-#ingredientsExample>li:hover {
+.listUlIng>li:hover {
     background-color: #ffff;
     color: #3282F7;
 }
@@ -171,7 +171,7 @@
     margin-left: 0.5rem;
 }
 
-#ustensilesExample>li:hover {
+.listUlUst>li:hover {
     background-color: #ffff;
     color: #ED6454;
 }

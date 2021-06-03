@@ -10,19 +10,14 @@ import Ustensils from '../filters/Ustensils.js';
 export default class Builder {
     static init() {
         // Build Section with all Recipes before Search
-        DomService.buildResult(recipesApiResult); 
+        DomService.buildResult(recipesApiResult);
         Messages.hideMessage();
         // Ingredients logic
-        Ingredients
-        .init(DataLogic.getAllIngredients(recipesApiResult), recipesApiResult);
+        Ingredients.init(DataLogic.getAllIngredients(recipesApiResult), recipesApiResult);
         // Appliances logic
-        Appliances
-        .init(DataLogic.getAllAppliances(recipesApiResult))
-        .filterByTags(recipesApiResult);
+        Appliances.init(DataLogic.getAllAppliances(recipesApiResult), recipesApiResult);
         // Ustensils logic
-        Ustensils
-        .init(DataLogic.getAllUstensils(recipesApiResult))
-        .filterByTags(recipesApiResult);
+        Ustensils.init(DataLogic.getAllUstensils(recipesApiResult), recipesApiResult);
     }
 
     static initSearch(result) {
@@ -30,15 +25,10 @@ export default class Builder {
         DomService.buildResult(result.recipesMatched);
         Messages.buildResultMessageWithResult(result.recipesMatched);
         // Ingredients logic
-        Ingredients
-        .init(result.ingredients, result.recipesMatched);
+        Ingredients.init(result.ingredients, result.recipesMatched);
         // Appliances logic
-        Appliances
-        .init(result.appliances)
-        .filterByTags(result.recipesMatched);
+        Appliances.init(result.appliances, result.recipesMatched);
         // Ustensils logic
-        Ustensils
-        .init(result.ustensils)
-        .filterByTags(result.recipesMatched);
+        Ustensils.init(result.ustensils, result.recipesMatched);
     }
 }

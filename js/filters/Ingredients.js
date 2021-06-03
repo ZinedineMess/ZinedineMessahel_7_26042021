@@ -23,11 +23,15 @@ export default class Ingredients {
 
     // display the ingredients in the ingredients zone according to the recipes displayed in the 'recipes' section
     static fillIngredients(ingredients) {
+        let ul = document.createElement('ul');
+        ul.classList.add('listUlIng');
+        this.ingredientsExample.appendChild(ul);
+
         ingredients.forEach((ingredient) => {
             let listIngredients = document.createElement('li');
-
+            
+            ul.appendChild(listIngredients);
             listIngredients.innerHTML = `${Utils.upperText(ingredient)}`
-            this.ingredientsExample.appendChild(listIngredients);
             listIngredients.classList.add('list-ingredients');
             listIngredients.setAttribute('data-filter', `${ingredient}`);
         });
@@ -56,7 +60,7 @@ export default class Ingredients {
                 event.target.classList.add('selected');
                 Buttons.hideButtonsOnClick(document.querySelector("#ingredients > button"),
                     document.querySelector("#openIngredientsFilter"),
-                    document.querySelector("#hiddenIngredientsFilter"))
+                    document.querySelector("#hiddenIngredientsFilter"));
                 Tags
                     .buildTags(ingredientTag, Utils.upperText(event.target.getAttribute('data-filter')))
                     .removeTagsOnClick(document.querySelector("#ingredientTag > i"), event, ingredientTag, recipes);
@@ -75,5 +79,10 @@ export default class Ingredients {
         Messages.buildResultMessageWithResult(resultFilters.show);
         Utils.showRecipesFiltered(resultFilters.show);
         Utils.hideRecipesFiltered(resultFilters.hide);
+
+        return {
+            'show': resultFilters.show,
+            'hide': resultFilters.hide
+        }
     }
 }
