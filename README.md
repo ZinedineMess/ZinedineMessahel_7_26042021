@@ -18,6 +18,9 @@ Ce projet s'inscrit dans le cadre de la formation "Développeur Front-End" propo
 -   Analyser un problème informatique
     
 -   Développer un algorithme pour résoudre un problème
+-   
+## Algorithm 2
+![Algorithm 2](https://res.cloudinary.com/dlpyn3wxf/image/upload/v1622733548/algo2_jlkrer.png)
 
 ## Installation
 
