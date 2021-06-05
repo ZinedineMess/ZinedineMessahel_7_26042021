@@ -79,10 +79,5 @@ export default class Ingredients {
         Messages.buildResultMessageWithResult(resultFilters.show);
         Utils.showRecipesFiltered(resultFilters.show);
         Utils.hideRecipesFiltered(resultFilters.hide);
-
-        return {
-            'show': resultFilters.show,
-            'hide': resultFilters.hide
-        }
     }
 }
