@@ -20,10 +20,16 @@ export default class DomService {
     // create the article which will contain the information of each recipe
     static createArticleElt(collection) {
         let article = document.createElement('article');
-        let dataFilter = collection.ingredients.map(element => element.ingredient) + collection.ustensils + collection.appliance;
+        let dataFilterIngredients = collection.ingredients.map(element => Utils.normalizeText(element.ingredient));
+        let dataFilterAppliances = Utils.normalizeText(collection.appliance);
+        let dataFilterUstensils = collection.ustensils;
+        let dataFilter = collection.ingredients.map(element => Utils.normalizeText(element.ingredient)) + collection.ustensils + Utils.normalizeText(collection.appliance);
 
         article.classList.add('articleRecipes');
-        article.setAttribute('data-filter', Utils.normalizeText(dataFilter));
+        article.setAttribute('data-filter', dataFilter);
+        article.setAttribute('data-filter-ingredients', dataFilterIngredients);
+        article.setAttribute('data-filter-appliances', dataFilterAppliances);
+        article.setAttribute('data-filter-ustensils', dataFilterUstensils);
         article.innerHTML = this.getArticleInnerHTML(collection);
 
         return article;
