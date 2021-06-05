@@ -4,21 +4,19 @@ import DataLogic from '../utilities/DataLogic.js';
 import Utils from '../utilities/Utils.js';
 
 export default class Search {
-    static recipesMatched = [];
-
     static searchMainInput(value) {
-        this.recipesMatched = [];
+        let recipesMatched = [];
 
         recipesApiResult.forEach(recipe => {
             if (Utils.normalizeText(recipe.name).includes(Utils.normalizeText(value)) || Utils.normalizeText(recipe.description).includes(Utils.normalizeText(value)) || recipe.ingredients.some(elt => Utils.normalizeText(elt.ingredient).includes(value))) {
-                this.recipesMatched.push(recipe);
+                recipesMatched.push(recipe);
             };
         });
         return {
-            'recipesMatched': this.recipesMatched,
-            'ingredients': DataLogic.getAllIngredients(this.recipesMatched),
-            'appliances': DataLogic.getAllAppliances(this.recipesMatched),
-            'ustensils': DataLogic.getAllUstensils(this.recipesMatched),
+            'recipesMatched': recipesMatched,
+            'ingredients': DataLogic.getAllIngredients(recipesMatched),
+            'appliances': DataLogic.getAllAppliances(recipesMatched),
+            'ustensils': DataLogic.getAllUstensils(recipesMatched),
         };
     }
 
